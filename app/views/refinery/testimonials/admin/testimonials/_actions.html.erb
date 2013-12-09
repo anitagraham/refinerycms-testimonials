@@ -1,0 +1,25 @@
+<ul>
+  <% if ::Refinery::Testimonials::Admin::TestimonialsController.searchable? %>
+    <li>
+      <%= render '/refinery/admin/search', :url => refinery.testimonials_admin_testimonials_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to t('.create_new'), refinery.new_testimonials_admin_testimonial_path,
+                 :class => "add_icon" %>
+  </li>
+<% if !searching? && ::Refinery::Testimonials::Admin::TestimonialsController.sortable? && ::Refinery::Testimonials::Testimonial.any? %>
+  <li>
+    <%= link_to t('.reorder', :what => "Testimonials"),
+                 refinery.testimonials_admin_testimonials_path,
+                 :id => "reorder_action",
+                 :class => "reorder_icon" %>
+
+    <%= link_to t('.reorder_done', :what => "Testimonials"),
+                 refinery.testimonials_admin_testimonials_path,
+                 :id => "reorder_action_done",
+                 :style => "display: none;",
+                 :class => "reorder_icon" %>
+  </li>
+<% end %>
+</ul>

@@ -1,0 +1,69 @@
+<%= form_for [refinery, :testimonials_admin, @testimonial] do |f| %>
+  <%= render '/refinery/admin/error_messages',
+              :object => @testimonial,
+              :include_object_name => true %>
+
+  
+  <div class='field'>
+    <%= f.label :name %>
+    <%= f.text_field :name, :class => 'larger widest'  %>
+
+  </div>
+  
+  <div class='field'>
+    <div id='page-tabs' class='clearfix ui-tabs ui-widget ui-widget-content ui-corner-all'>
+      <ul id='page_parts'>
+        <% [:quote].each_with_index do |part, part_index| %>
+          <li class='ui-state-default<%= ' ui-state-active' if part_index == 0 %>'>
+            <%= link_to t("#{part}", :scope => "activerecord.attributes.refinery/testimonials/testimonial", :default => part.to_s.titleize), "##{part}" %>
+          </li>
+        <% end %>
+      </ul>
+      <div id='page_part_editors'>
+        <% [:quote].each do |part| %>
+          <div class='page_part' id='<%= part %>'>
+            <%= f.text_area part, :rows => 20, :class => 'wymeditor widest' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+  
+  <div class='field'>
+    <%= f.label :company %>
+    <%= f.text_field :company  %>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :job_title %>
+    <%= f.text_field :job_title  %>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :website %>
+    <%= f.text_field :website  %>
+  </div>
+  
+  <div class='field'>
+    <%= f.label :received_date %>
+    <%= f.date_select :received_date, :order => [:day, :month, :year], :prompt => true   %>
+  </div>
+
+	<div class="field">
+		<%= f.label :received_channel %>
+		<%= f.select :received_channel, Refinery::Testimonials::Testimonial::CHANNELS  %>
+	</div>
+	  
+  <div class='field'>
+    <%= f.label :position %>
+    <%= f.number_field :position  %>
+
+  </div>
+  
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.testimonials.admin.testimonials.testimonial'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @testimonial.name) %>
+<% end %>
+

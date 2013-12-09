@@ -1,0 +1,25 @@
+<div class='wym_skin_refinery page_part' id='page_testimonial_control'>
+
+  <div class='field enable'>
+    <p>
+      <%= f.check_box :testimonials_show, {}, true, false  %>
+      <%= f.label :testimonials_show, "Show Testimonials on this page?" %>
+    </p>
+  </div>
+
+  <div class='fields'>
+    <p>
+      <%= f.label  :testimonials_count, "How many testimonials to show (Enter 0 to show all)" %>
+      <%= f.number_field  :testimonials_count  %>
+    </p>
+
+    <p>Select Testimonals By  </p>
+      <%= f.radio_button  :testimonials_select,  'Recent', :class=> 'button' %>
+      <%= f.label :testimonials_select, 'By date (Recent first)', :value=> 'Recent' %>
+      <%= f.radio_button  :testimonials_select,  'Random', :class => 'button' %>
+      <%= f.label :testimonials_select, 'Random', :value => 'Random' %>
+  </div>
+</div>
+<% #content_for :stylesheets, stylesheet_link_tag('refinery/testimonials')
+%>
+<% content_for :javascripts, javascript_include_tag('testimonials') %>

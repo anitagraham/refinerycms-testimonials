@@ -1,0 +1,12 @@
+.testimonials {
+  list-style: none inside none;
+  .testimonial {
+    cite {font-style:normal;}
+    blockquote {
+      margin:0 0 14px;
+      p {padding: 0 36px;
+      }
+    }
+  }
+}
+

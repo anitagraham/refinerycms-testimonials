@@ -1,0 +1,27 @@
+en:
+  refinery:
+    plugins:
+      testimonials:
+        title: Testimonials
+        description: Create and manage Testimonials for your site
+    testimonials:
+      admin:
+         testimonials:
+          records:
+            title: Testimonials
+            no_items_yet: There are no testimonials yet.
+          actions:
+            create_new: Add New Testimonial
+            reorder: Reorder testimonials
+            reorder_done: Done reordering testimonials
+          testimonial:
+            edit: Edit this testimonial
+            delete: Remove this testimonial forever
+  activerecord:
+    models:
+      refinery/testimonials/testimonial: testimonial
+    attributes:
+      refinery/testimonials/testimonial:
+        name: Name
+        quote: Quote
+

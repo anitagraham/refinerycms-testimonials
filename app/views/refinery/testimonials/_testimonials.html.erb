@@ -1,0 +1,12 @@
+<% logger.debug "------ Testimonials view from gem ------"%>
+<% content_for :testimonials do %>
+  <% if @testimonials %>
+    <section id="testimonials">
+      <ul>
+        <%= render @testimonials %>
+      </ul>
+    </section>
+  <%else%>
+    <% logger.debug "------ @testimonials empty or nil -------"%>
+  <%end%>
+<%end%>
