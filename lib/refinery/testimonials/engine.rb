@@ -1,4 +1,4 @@
-module Refinery
+ module Refinery
   module Testimonials
     class Engine < Rails::Engine
       include Refinery::Engine
@@ -7,18 +7,19 @@ module Refinery
       engine_name :refinery_testimonials
 
       def self.register_testimonials(tab)
-        tab.name = "testimonials"
-        tab.partial = "/refinery/testimonials/admin/testimonials/tabs/testimonials"
+        tab.name = 'testimonials'
+        tab.partial = '/refinery/testimonials/admin/testimonials/tabs/testimonials'
       end
 
       before_inclusion do
         Refinery::Plugin.register do |plugin|
-          plugin.name = "refinery_testimonials"
+          plugin.name = 'refinery_testimonials'
           plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.testimonials_admin_testimonials_path }
           plugin.pathname = root
+          plugin.menu_match = %r{refinery/testimonials/testimonials}
           plugin.activity = {
             :class_name => :'refinery/testimonials/testimonial',
-            :title => 'name'
+            :title =>  'name'
           }
         end
       end

@@ -1,7 +1,7 @@
 # Testimonials plugin for RefineryCMS
 http://github.com/resolve/Refinery
 
-Version 2.0 is a rewrite of the original refinerycms-testimonials. It is compatible with Refinerycms 2.1
+Version 2.0 is a rewrite of the original refinerycms-testimonials. It is compatible with Refinerycms 2.0
 
 ## How to install
 
@@ -17,6 +17,7 @@ To install the migrations, run:
 
     rails generate refinery:testimonials
     rake db:migrate
+    rake db:seed
 
 ## Add Testimonials to the database
 

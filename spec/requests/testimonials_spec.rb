@@ -1,5 +1,5 @@
 # encoding: utf-8
-require "spec_helper"
+require 'spec_helper'
 require 'i18n'
 
 # Use add_testimonial when testing the online interface
@@ -7,19 +7,19 @@ require 'i18n'
 module Refinery
   module  Admin
 
-    describe "Testimonials Admin Interface" do
+    describe   'Testimonials Admin Interface' do
       login_refinery_user
 
       context 'At all times' do
         it 'has a Testimonials Tab' do
           visit  refinery.admin_dashboard_path
-          expect(page).to have_content(::I18n.t('title', :scope => 'refinery.plugins.testimonials'))
-          expect(page).to have_selector('#plugin_testimonials')
+          expect(page).to have_content(::I18n.t('title', :scope => 'refinery.plugins.refinery_testimonials'))
+          expect(page).to have_selector('#plugin_refinery_testimonials')
         end
       end
 
-      context "When there are no testimonials" do
-        it "Says no items yet" do
+      context 'When there are no testimonials' do
+        it 'Says no items yet' do
           visit refinery.testimonials_admin_testimonials_path
           expect(page).to have_content(::I18n.t('no_items_yet', :scope => 'refinery.testimonials.admin.testimonials.records'))
         end
@@ -27,30 +27,30 @@ module Refinery
         it "doesn't show reorder testimonials link" do
           visit refinery.testimonials_admin_testimonials_path
 
-          within "#actions" do
+          within '#actions' do
             expect(page).to have_no_content(::I18n.t('reorder', :scope => 'refinery.testimonials.admin.testimonials.actions'))
             expect(page).to have_no_selector("a[href='/refinery/testimonials/testimonials']")
           end
         end
       end
 
-      describe "action links" do
-        it "shows add new testimonial link" do
+      describe 'action links' do
+        it 'shows add new testimonial link' do
           visit refinery.testimonials_admin_testimonials_path
 
-          within "#actions" do
+          within '#actions' do
             expect(page).to have_content(::I18n.t('create_new', :scope => 'refinery.testimonials.admin.testimonials.actions'))
             expect(page).to have_selector("a[href='/refinery/testimonials/testimonials/new']")
           end
         end
 
-        context "when some testimonials exist" do
-          before { 2.times { |i| build_testimonial("Testimonial #{i}", "quote")} }
+        context 'when some testimonials exist' do
+          before { 2.times { |i| build_testimonial("Testimonial #{i}", 'quote')} }
 
-          it "shows reorder testimonials link" do
+          it 'shows reorder testimonials link' do
             visit refinery.testimonials_admin_testimonials_path
 
-            within "#actions" do
+            within '#actions' do
               expect(page).to have_content(::I18n.t('reorder', :scope => 'refinery.testimonials.admin.testimonials.actions'))
               expect(page).to have_selector("a[href='/refinery/testimonials/testimonials']")
             end
@@ -58,10 +58,10 @@ module Refinery
         end
       end
 
-      describe "new/create", :js => true do
-        it "allows a testimonial to be created" do
+      describe 'new/create', :js => true do
+        it 'allows a testimonial to be created' do
           visit refinery.testimonials_admin_testimonials_path
-          add_testimonial("My first Testimonial", "Quote")
+          add_testimonial('My first Testimonial', 'Quote')
 
           expect(page).to have_content("'Quote by My first Testimonial' was successfully added.")
 
@@ -73,43 +73,43 @@ module Refinery
         end
       end
 
-      describe "edit/update" do
+      describe 'edit/update' do
         before do
-          build_testimonial("Update me", "quote")
+          build_testimonial('Update me', 'quote')
 
           visit refinery.testimonials_admin_testimonials_path
-          expect(page).to have_content("Update me")
+          expect(page).to have_content('Update me')
         end
 
         context 'when saving and returning to index' do
-          it "updates testimonial" do
-            click_link "Edit this testimonial"
+          it 'updates testimonial' do
+            click_link 'Edit this testimonial'
 
-            fill_in "Name", :with => "Updated"
-            click_button "Save"
+            fill_in 'Name', :with => 'Updated'
+            click_button 'Save'
 
             expect(page).to have_content("'Quote by Updated' was successfully updated.")
           end
         end
       end
 
-      describe "Destroy" do
-        context "When a testimonial can be deleted" do
+      describe 'Destroy' do
+        context 'When a testimonial can be deleted' do
           before do
             build_testimonial('Delete me', 'Quote me')
           end
 
-          it "Will show delete button" do
+          it 'Will show delete button' do
             visit refinery.testimonials_admin_testimonials_path
-            within ".record" do
+            within '.record' do
               expect(page.html).to include(::I18n.t('delete', :scope => 'refinery.testimonials.admin.testimonials.testimonial'))
               expect(page).to have_selector("a[href='/refinery/testimonials/testimonials/1']")
             end
           end
 
-          it "Will delete the testimonial" do
+          it 'Will delete the testimonial' do
             visit refinery.testimonials_admin_testimonials_path
-            click_link "Remove this testimonial forever"
+            click_link 'Remove this testimonial forever'
 
             expect(page).to have_content("'Quote by Delete me' was successfully removed.")
             expect(Refinery::Testimonials::Testimonial.count).to eq(0)
@@ -148,7 +148,7 @@ module Refinery
         context 'Editing Testimonial Settings' do
           it 'Can change whether testimonials are changed on this page' do
             page.check 'page_testimonials_show'
-            click_button "Save & continue editing"
+            click_button 'Save & continue editing'
             find('#flash').visible?
             expect(page).to have_content("'Test Controls' was successfully updated.")
             expect(page.has_checked_field?('page_testimonials_show'))
