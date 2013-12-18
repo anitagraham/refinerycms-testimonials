@@ -8,7 +8,7 @@
 
       def self.register_testimonials(tab)
         tab.name = 'testimonials'
-        tab.partial = '/refinery/testimonials/admin/testimonials/tabs/testimonials'
+        tab.partial = '/refinery/testimonials/admin/testimonials/tabs/testimonial_control'
       end
 
       before_inclusion do
