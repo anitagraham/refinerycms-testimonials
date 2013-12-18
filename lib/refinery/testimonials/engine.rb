@@ -18,7 +18,8 @@
           plugin.pathname = root
           plugin.menu_match = %r{refinery/testimonials/testimonials}
           plugin.activity = {
-            :class_name => :'refinery/testimonials/testimonial',
+            # :class_name => :'refinery/testimonials/testimonial',
+            :class_name => Refinery::Testimonials::Testimonial,
             :title =>  'name'
           }
         end

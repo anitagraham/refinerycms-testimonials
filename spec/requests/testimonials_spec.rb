@@ -7,7 +7,7 @@ require 'i18n'
 module Refinery
   module  Admin
 
-    describe   'Testimonials Admin Interface' do
+    describe 'Testimonials Admin Interface' do
       login_refinery_user
 
       context 'At all times' do
