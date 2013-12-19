@@ -24,10 +24,11 @@
       <p>
         Select Testimonals By
       </p>
-      <%= f.radio_button  :testimonials_select,  'Recent', :class=> 'button' %>
-      <%= f.label :testimonials_select, 'By date (Recent first)', :value=> 'Recent' %>
-      <%= f.radio_button  :testimonials_select,  'Random', :class => 'button' %>
-      <%= f.label :testimonials_select, 'Random', :value => 'Random' %>
+      <%= f.radio_button  :testimonials_select,  'Recent' %>
+      <%= f.label :testimonials_select, 'By date (Recent first)', :value=> 'Recent', :class=>'stripped'%>
+      <br />
+      <%= f.radio_button  :testimonials_select,  'Random' %>
+      <%= f.label :testimonials_select, 'Random', :value => 'Random', :class=>'stripped' %>
     </div>
   </div>
 </div>

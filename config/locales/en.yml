@@ -7,7 +7,8 @@ en:
     testimonials:
       admin:
         testimonials:
-          testimonial_control:
+          tabs:
+            testimonial_control:
              testimonials_show: Show Testimonials
              testimonials_show_label: Show testimonials on this page. Use the options below to control which testimonials are shown.
              testimonials_show_help: Check this box if you want testimonials displayed on this page
