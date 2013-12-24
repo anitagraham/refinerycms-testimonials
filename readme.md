@@ -42,6 +42,13 @@ Each page now has a testimonials tab which can be used to decide how testimonial
 
 ## Changes to Layout Templates
 
+See Enabling Custome Layout Templates in this [refinery guide](http://refinerycms.com/guides/using-custom-view-or-layout-templates]
+
+To override the standard refinery application layout do
+rake refinery:override view=layouts/application
+
+This will create the file app/views/layouts/application.html.erb
+
 To display testimonials add `<%= yield :testimonials %>` in a layout template.
 For example, in application.html.erb
 

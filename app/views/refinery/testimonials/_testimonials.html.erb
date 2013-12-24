@@ -1,5 +1,5 @@
 <% logger.debug "------ Testimonials view from gem ------"%>
-<% content_for :testimonials do %>
+<H3>Testimonials</H3>
   <% if @testimonials %>
     <section id="testimonials">
       <ul>
@@ -8,5 +8,4 @@
     </section>
   <%else%>
     <% logger.debug "------ @testimonials empty or nil -------"%>
-  <%end%>
 <%end%>
