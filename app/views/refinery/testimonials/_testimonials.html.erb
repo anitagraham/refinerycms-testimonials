@@ -1,11 +1,7 @@
-<% logger.debug "------ Testimonials view from gem ------"%>
-<H3>Testimonials</H3>
-  <% if @testimonials %>
-    <section id="testimonials">
-      <ul>
-        <%= render @testimonials %>
-      </ul>
-    </section>
-  <%else%>
-    <% logger.debug "------ @testimonials empty or nil -------"%>
+<% if @testimonials %>
+  <section id="testimonials">
+    <ul>
+      <%= render @testimonials %>
+    </ul>
+  </section>
 <%end%>

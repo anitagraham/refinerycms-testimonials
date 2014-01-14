@@ -49,7 +49,7 @@ rake refinery:override view=layouts/application
 
 This will create the file app/views/layouts/application.html.erb
 
-To display testimonials add `<%= yield :testimonials %>` in a layout template.
+To display testimonials add you can render testimonials in a layout template.
 For example, in application.html.erb
 
 ````ruby
