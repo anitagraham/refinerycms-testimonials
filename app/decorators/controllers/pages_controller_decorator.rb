@@ -3,16 +3,10 @@ Refinery::PagesController.class_eval do
   protected
 
   def get_testimonials
-    # logger.debug "Running testimonials"
-    # logger.debug "----------- #{page.testimonials_show} ---------------"
-    # logger.debug "----------- #{page.testimonials_count} ---------------"
-    # logger.debug "----------- #{page.testimonials_select} ---------------"
     if @page.testimonials_show
-
       n = page.testimonials_count==0 ? Refinery::Testimonials::Testimonial.count : page.testimonials_count
       @testimonials = Refinery::Testimonials::Testimonial.scoped
       @testimonials = page.testimonials_select=='Random' ? @testimonials.random(n) : @testimonials.recent(n)
-
     end
   end
 end
