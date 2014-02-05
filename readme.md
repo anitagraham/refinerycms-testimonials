@@ -49,7 +49,7 @@ rake refinery:override view=layouts/application
 
 This will create the file app/views/layouts/application.html.erb
 
-To  you can render testimonials in a layout template.
+Testimonials  in a layout template.
 For example, in application.html.erb
 
 ````ruby
