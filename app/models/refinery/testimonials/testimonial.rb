@@ -19,7 +19,7 @@ module Refinery
       validates :quote, :presence => true
 
       scope :recent, lambda { |n| order('created_at DESC').limit(n)}
-      scope :random, lambda { |n| order('RAND()').limt(n)}
+      scope :random, lambda { |n| order('RAND()').limit(n)}
 
       def flash_name
         "Quote by #{self.name}"
