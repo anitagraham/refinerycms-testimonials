@@ -46,7 +46,7 @@ See Enabling Custome Layout Templates in this [refinery guide](http://refinerycm
 
 ## Views
 
-Somewhere in a view or layour you will need to call the testimonials partial.
+Somewhere in a view or layout you will need to call the testimonials partial.
 
 ````ruby
         <section id='side'>
