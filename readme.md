@@ -40,23 +40,29 @@ Each page now has a testimonials tab which can be used to decide how testimonial
 + How to select and order which testimonials to show (Random, __Most Recent First__)
 
 
-## Changes to Layout Templates
+## Changes to Views or Layout Templates
 
-See Enabling Custome Layout Templates in this [refinery guide](http://refinerycms.com/guides/using-custom-view-or-layout-templates]
+See Enabling Custome Layout Templates in this [refinery guide](http://refinerycms.com/guides/using-custom-view-or-layout-templates)
 
-To override the standard refinery application layout do
-rake refinery:override view=layouts/application
+## Views
 
-This will create the file app/views/layouts/application.html.erb
-
-Testimonials  in a layout template.
-For example, in application.html.erb
+Somewhere in a view or layour you will need to call the testimonials partial.
 
 ````ruby
-<%=  yield :testimonials %>
+        <section id="side">
+          <%= raw @page.content_for(:side) %>
+          <%= render 'refinery/testimonials/testimonials' %>
+        </section>
 ````
 
-For more control over what is displayed the @testimonials collection is available for you to render as html or json.
+will render the CMS content for a page part called 'side', followed by some testimonials.
+
+For more control over what is displayed the @testimonials collection is available for you.
+You can call your own partial to render the collection.
+
+````ruby
+  <%= render 'myTestimonials', :testimonials => @testimonials.as_json
+````
 
 
 
