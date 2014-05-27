@@ -49,7 +49,7 @@ See Enabling Custome Layout Templates in this [refinery guide](http://refinerycm
 Somewhere in a view or layour you will need to call the testimonials partial.
 
 ````ruby
-        <section id="side">
+        <section id='side'>
           <%= raw @page.content_for(:side) %>
           <%= render 'refinery/testimonials/testimonials' %>
         </section>
@@ -61,7 +61,7 @@ For more control over what is displayed the @testimonials collection is availabl
 You can call your own partial to render the collection.
 
 ````ruby
-  <%= render 'myTestimonials', :testimonials => @testimonials.as_json
+  <%= render 'myTestimonials', :testimonials => @testimonials.as_json %>
 ````
 
 
