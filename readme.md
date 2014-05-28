@@ -1,7 +1,6 @@
-# Testimonials plugin for RefineryCMS
-http://github.com/resolve/Refinery
+# Testimonials plugin for [Refinery CMS](https://github.com/refinery/refinerycms)
 
-Version 2.0 is a rewrite of the original refinerycms-testimonials. It is compatible with Refinerycms 2.0
+Version 2.0 is a rewrite of the original refinerycms-testimonials. It is compatible with Refinery CMS 2.0.
 
 ## How to install
 
@@ -48,20 +47,20 @@ See Enabling Custome Layout Templates in this [refinery guide](http://refinerycm
 
 Somewhere in a view or layout you will need to call the testimonials partial.
 
-````ruby
-        <section id='side'>
-          <%= raw @page.content_for(:side) %>
-          <%= render 'refinery/testimonials/testimonials' %>
-        </section>
+````erb
+<section id='side'>
+  <%= raw @page.content_for(:side) %>
+  <%= render 'refinery/testimonials/testimonials' %>
+</section>
 ````
 
 will render the CMS content for a page part called 'side', followed by some testimonials.
 
-For more control over what is displayed the @testimonials collection is available for you.
+For more control over what is displayed the `@testimonials` collection is available for you.
 You can call your own partial to render the collection.
 
-````ruby
-  <%= render 'myTestimonials', :testimonials => @testimonials.as_json %>
+````erb
+<%= render 'myTestimonials', :testimonials => @testimonials.as_json %>
 ````
 
 
