@@ -18,16 +18,11 @@
           plugin.pathname = root
           plugin.menu_match = %r{refinery/testimonials/testimonials}
           plugin.activity = {
-            # :class_name => :'refinery/testimonials/testimonial',
             :class_name => Refinery::Testimonials::Testimonial,
             :title =>  'name'
           }
+          plugin.page_data_name = 'testimonials'
         end
-      end
-
-      config.to_prepare do
-        require 'refinerycms-pages'
-        Refinery::Page.send :testimonial_fields
       end
 
       config.after_initialize do
@@ -35,8 +30,8 @@
         Refinery::Pages::Tab.register do |tab|
           register_testimonials tab
         end
+        require 'refinery/testimonial_item_presenter'
       end
-
     end
   end
 end

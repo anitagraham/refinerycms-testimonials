@@ -2,11 +2,12 @@ source "http://rubygems.org"
 
 gemspec
 
-gem 'refinerycms', '~>2.0.10'
-gem 'refinerycms-i18n', '~>2.0.0'
-gem "globalize3", "0.3.0"
+gem 'refinerycms', '~>2.1.0'
+gem 'refinerycms-i18n', '~>2.1.0'
 gem 'rails', '3.2.13'
 gem 'randumb'
+gem 'acts_as_indexed'
+gem 'mustache'
 
 # Database Configuration
 platforms :jruby do
@@ -34,9 +35,9 @@ group :development, :test do
     gem 'rspec-set'
   end
 
-  gem 'capybara-webkit'
+  # gem 'capybara-webkit'
   gem 'launchy'
-  gem 'refinerycms-testing', '~> 2.0.10'
+  gem 'refinerycms-testing'
   gem 'rspec-rails'
 
   platforms :mswin, :mingw do
