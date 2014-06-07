@@ -1,6 +1,6 @@
 # Open the Refinery::Page model for manipulation
 
-@Refinery::Page.class_eval do
+Refinery::Page.class_eval do
   # Whitelist the testimonials control fields
   attr_accessor :testimonials
   attr_accessible :testimonials, :testimonials_show, :testimonials_count, :testimonials_select
