@@ -24,11 +24,16 @@
         end
       end
 
+      config.to_prepare do
+        Refinery::Testimonials.attach!
+      end
+
       config.after_initialize do
-        Refinery.register_extension(Refinery::Testimonials)
+        Refinery.register_engine(Refinery::Testimonials)
         Refinery::Pages::Tab.register do |tab|
           register_testimonials tab
         end
+
         require 'refinery/testimonial_item_presenter'
       end
     end

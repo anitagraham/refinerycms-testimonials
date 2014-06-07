@@ -17,6 +17,12 @@ module Refinery
       def factory_paths
         @factory_paths ||= [ root.join('spec', 'factories').to_s ]
       end
+
+      def attach!
+        require 'refinery/page'
+        require 'refinery/testimonials/extension'
+        Refinery::Page.send :testimonial_fields
+      end
     end
   end
 end
