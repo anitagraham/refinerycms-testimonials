@@ -5,7 +5,7 @@ module Refinery
 
   module Testimonials
     require 'refinery/testimonials/engine'
-    require 'refinery/testimonials/extension'
+    # require 'refinery/testimonials/extension'
 
     class << self
       attr_writer :root
@@ -18,11 +18,6 @@ module Refinery
         @factory_paths ||= [ root.join('spec', 'factories').to_s ]
       end
 
-      def attach!
-        require 'refinery/page'
-        require 'refinery/testimonials/extension'
-        Refinery::Page.send :testimonial_fields
-      end
     end
   end
 end

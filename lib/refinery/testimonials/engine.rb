@@ -24,10 +24,6 @@
         end
       end
 
-      config.to_prepare do
-        Refinery::Testimonials.attach!
-      end
-
       config.after_initialize do
         Refinery.register_engine(Refinery::Testimonials)
         Refinery::Pages::Tab.register do |tab|
