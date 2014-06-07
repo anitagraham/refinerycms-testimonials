@@ -6,7 +6,6 @@ module Refinery
 
       attr_accessor :output_buffer
       config_accessor :item_class, :item_tag, :quote_includes_cite, :date_tag, :name_tag, :quote_tag, :cite_tag
-      self.id = :testimonials
 
       self.item_class = :received_channel
       self.item_tag = :li
@@ -20,6 +19,10 @@ module Refinery
         # return if page_part.nil?
         super
         self.fallback_html = ""
+      end
+
+     def content_html(can_use_fallback)
+        override_html.present? ? override_html : collection_markup()
       end
 
       private

@@ -21,7 +21,6 @@
             :class_name => Refinery::Testimonials::Testimonial,
             :title =>  'name'
           }
-          plugin.page_data_name = 'testimonials'
         end
       end
 
