@@ -10,7 +10,7 @@ Refinery::Page.class_eval do
     if testimonials_show
       n = testimonials_count==0 ? Refinery::Testimonials::Testimonial.count : testimonials_count
       @testimonials = Refinery::Testimonials::Testimonial.scoped
-      @testimonials = testimonials_select=='Random' ? random(n) : recent(n)
+      @testimonials = testimonials_select=='Random' ? @testimonials.random(n) : @testimonials.recent(n)
     end
   end
 end
