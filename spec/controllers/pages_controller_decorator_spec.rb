@@ -3,7 +3,7 @@ require "spec_helper"
 module Refinery
 
   describe PagesController, :type => :controller do
-    login_refinery_user
+    refinery_login_with :refinery_user
 
     before(:all) do
       Page.create :title => 'Test Controls'
@@ -12,7 +12,6 @@ module Refinery
 
     context 'With default settings' do
       it 'should not get any testimonials' do
-        @controller = Refinery::PagesController.new
         get :show, :path=>"test-controls"
         expect(assigns(:testimonials)).to be_nil
       end
@@ -29,7 +28,6 @@ module Refinery
         context 'testimonials_count 0' do
           it 'should return all testimonials' do
             get :show, :path=>'test-controls'
-            # expect(assigns(:testimonials)).not_to be_nil
             expect(assigns(:testimonials)).to have(8).items
           end
         end

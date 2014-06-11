@@ -37,9 +37,7 @@ end
 ENGINE_PATH = File.dirname(__FILE__)
 APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
 
-if File.exists?(APP_RAKEFILE)
-  load 'rails/tasks/engine.rake'
-end
+load 'rails/tasks/engine.rake' if File.exists?(APP_RAKEFILE)
 
 Dir[File.expand_path('../tasks/**/*', __FILE__)].each do |task|
   load task
@@ -53,5 +51,4 @@ desc "Build gem files for all projects"
 task :build => "all:build"
 
 task :default => :spec
-
 

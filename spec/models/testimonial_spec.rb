@@ -9,7 +9,7 @@ module Refinery
 
       context "with valid attributes" do
         it "should report being valid" do
-          expect(testimonial.valid?).to be_true
+          expect(testimonial.valid?).to be true
         end
       end
 
@@ -22,14 +22,14 @@ module Refinery
           expect(testimonial.quote).to eq('Like your work')
         end
 
-        invalid_testimonial =  Factory.build(:testimonial, :name=> '')
+        invalid_testimonial =  FactoryGirl.build(:testimonial, :name=> '')
 
         it 'should_not be_valid' do
           expect(invalid_testimonial).not_to be_valid
           expect(invalid_testimonial.errors).not_to be_empty
         end
 
-        invalid_testimonial = Factory.build(:testimonial, :quote => '')
+        invalid_testimonial = FactoryGirl.build(:testimonial, :quote => '')
          it 'should_not be_valid' do
            expect(invalid_testimonial).not_to be_valid
            expect(invalid_testimonial.errors).not_to be_empty

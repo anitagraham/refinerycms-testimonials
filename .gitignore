@@ -3,7 +3,7 @@ tags
 *.lock
 	
 .project
-
+spec/dummy/*
 spec/dummy/dummy_test
 
 spec/dummy/dummy_dev

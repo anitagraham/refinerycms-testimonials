@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'spork'
+require 'factory_girl'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -43,11 +44,6 @@ def setup_environment
     config.treat_symbols_as_metadata_keys_with_true_values = true
     config.filter_run :focus => true
     config.run_all_when_everything_filtered = true
-
-    # config.filter_run :js => true if ENV['JS'] == 'true'
-    # config.filter_run :js => nil if ENV['JS'] == 'false'
-    config.run_all_when_everything_filtered = true
-    # config.include ActionView::TestCase::Behavior, :example_group => { :file_path => %r{spec/presenters} }
   end
 end
 

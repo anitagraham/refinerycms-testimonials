@@ -37,7 +37,6 @@ group :development, :test do
 
   # gem 'capybara-webkit'
   gem 'launchy'
-  gem 'refinerycms-testing'
   gem 'rspec-rails'
 
   platforms :mswin, :mingw do
