@@ -30,7 +30,6 @@
           register_testimonials tab
         end
         Refinery::Pages.configure do |config|
-          puts '-----------------------  adding parameters to page_params -------------------------'
            config.admin_page_params.concat [:testimonials_show, :testimonials_count, :testimonials_select]
         end
         require 'refinery/testimonial_item_presenter'
