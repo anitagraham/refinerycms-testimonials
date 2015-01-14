@@ -32,10 +32,7 @@ Refinery::Core.configure do |config|
 
   # Should set this if concerned about DOS attacks. See
   # http://markevans.github.com/dragonfly/file.Configuration.html#Configuration
-  # config.dragonfly_secret = "c72f469f42161c8d267d7b5c42abd37c744650bc1f29845f"
-
-  # Add extra tags to the wymeditor whitelist e.g. = {'tag' => {'attributes' => {'1' => 'href'}}} or just {'tag' => {}}
-  # config.wymeditor_whitelist_tags = {}
+  # config.dragonfly_secret = "cf4143937374949fc7a2e81e13da4367ba584928a92af428"
 
   # Register extra javascript for backend
   # config.register_javascript "prototype-rails"
@@ -44,5 +41,6 @@ Refinery::Core.configure do |config|
   # config.register_stylesheet "custom", :media => 'screen'
 
   # Specify a different backend path than the default of /refinery.
+  # Make sure you clear the `tmp/cache` directory after changing this setting.
   # config.backend_route = "refinery"
 end

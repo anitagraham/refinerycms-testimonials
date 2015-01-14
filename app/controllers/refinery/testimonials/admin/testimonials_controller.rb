@@ -4,7 +4,13 @@ module Refinery
       class TestimonialsController < ::Refinery::AdminController
 
         crudify :'refinery/testimonials/testimonial',
-                :title_attribute => :flash_name, :xhr_paging => true
+                :title_attribute => :flash_name
+
+        protected
+
+        def testimonial_params
+          params.require(:testimonial).permit(:name, :quote, :company, :job_title, :website, :received_date, :received_channel, :position)
+        end
       end
     end
   end

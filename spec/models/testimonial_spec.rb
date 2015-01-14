@@ -18,8 +18,8 @@ module Refinery
         it  'should be_valid'  do
 
           expect(testimonial.errors).to  be_empty
-          expect(testimonial.name).to  eq('Person Name')
-          expect(testimonial.quote).to eq('Like your work')
+          expect(testimonial.name).to  match('Person Name \d{1,3}')
+          expect(testimonial.quote).to match('Like your work \d{1,3}')
         end
 
         invalid_testimonial =  FactoryGirl.build(:testimonial, :name=> '')

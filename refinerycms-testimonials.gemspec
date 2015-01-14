@@ -1,19 +1,24 @@
 # Encoding: UTF-8
 
 Gem::Specification.new do |s|
-  s.platform          = Gem::Platform::RUBY
-  s.name              = 'refinerycms-testimonials'
-  s.version           = '2.1.0'
-  s.description       = 'Ruby on Rails Testimonials extension for Refinery CMS'
-  s.date              = '2013-09-25'
-  s.summary           = 'Testimonials extension for Refinery CMS'
+  s.name              = %q{refinerycms-testimonials}
+  s.version           = %q{3.0.0}
+  s.description       = %q{Ruby on Rails Testimonials extension for Refinery CMS}
+  s.summary           = %q{Testimonials extension for Refinery CMS}
+  s.email             = %q{info@refinerycms.com}
+  s.homepage          = %q{http://github.com/refinery/refinerycms-page-images}
   s.require_paths     = %w(lib)
-  s.files             = Dir["{app,config,db,lib}/**/*"] + ["readme.md"]
-  s.authors           = 'tsdbrown - Luke Brown- magpieuk, Lee Irving - http://www.transcendit.co.uk, anita - Anita Graham - http//:www.joli.com.au'
+  s.license            = %q{MIT}
+  s.authors           = %q{tsdbrown - Luke Brown- magpieuk, Lee Irving - http://www.transcendit.co.uk, anita - Anita Graham - http//:www.joli.com.au}
+
+  s.files             = `git ls-files`.split("\n")
+  s.test_files        = `git ls-files -- spec/*`.split("\n")
 
   # Runtime dependencies
-  s.add_dependency             'refinerycms'
+  s.add_dependency    %q{refinerycms}
+  s.add_dependency    %q{decorators},        %q{~> 1.0.0}
+  s.add_dependency    %q{globalize},         %q{~> 4.0}
 
   # Development dependencies (usually used for testing)
-  s.add_development_dependency 'refinerycms-testing'
+  s.add_development_dependency %q{refinerycms-testing}
 end
