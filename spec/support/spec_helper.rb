@@ -4,6 +4,15 @@ module Selectors
   end
 end
 
+def ensure_on(path)
+  visit(path) unless current_path == path
+end
+
+RSpec.configure do |c|
+  c.alias_it_should_behave_like_to :it_has_behaviour, 'has behaviour:'
+  # c.alias_it_should_not_behave_like_to :it_does_not_have_behaviour,
+end
+
 RSpec::Matchers.define :each do |meta|
   match do |actual|
     actual.each_with_index do |i, j|

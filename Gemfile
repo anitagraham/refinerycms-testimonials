@@ -4,17 +4,17 @@ gemspec
 
 gem 'refinerycms', github: 'refinery/refinerycms'
 gem 'refinerycms-i18n', github: 'refinery/refinerycms-i18n'
-gem 'refinerycms-wymeditor', '~> 1.0.0'
+gem 'refinerycms-wymeditor', '~> 1.0.5'
+gem 'refinerycms-acts-as-indexed'
 
 gem "mime-types", "~> 1.25"
 
 group :test do
   gem 'refinerycms-testing', github: 'refinery/refinerycms'
   gem 'poltergeist'
-  gem 'awesome_print'
 end
 
-# gem 'randumb'
+gem 'randumb'
 gem 'mustache'
 
 # Database Configuration

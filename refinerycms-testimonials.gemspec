@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   # Runtime dependencies
   s.add_dependency    %q{refinerycms}
-  s.add_dependency    %q{decorators},        %q{~> 1.0.0}
+  s.add_dependency    %q{decorators},        %q{~> 2.0.0}
   s.add_dependency    %q{globalize},         %q{~> 4.0}
 
   # Development dependencies (usually used for testing)
