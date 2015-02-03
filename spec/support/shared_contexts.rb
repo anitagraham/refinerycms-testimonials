@@ -16,13 +16,12 @@ shared_context 'Edit Page' do
 end
 
 shared_context 'Many Testimonials' do
-  FactoryGirl.create_list(:testimonial, 8)
+  FactoryGirl.build_list(:testimonial, 8)
 end
 
-
-
 shared_context 'No Testimonials' do
-  Refinery::Testimonials::Testimonial.delete_all
+  # Refinery::Testimonials::Testimonial.delete_all()
+  # puts "There are #{Refinery::Testimonials::Testimonial.count} testimonials left."
 end
 
 shared_context 'Destroy Testimonial' do
