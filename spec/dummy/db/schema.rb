@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202074416) do
+ActiveRecord::Schema.define(version: 20150204034026) do
 
   create_table "refinery_images", force: true do |t|
     t.string   "image_mime_type"

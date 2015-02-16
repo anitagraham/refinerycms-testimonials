@@ -3,7 +3,7 @@ shared_examples_for 'Allows a testimonial to be added' do
   def add_testimonial(from, quote)
     click_link ::I18n.t('create_new', :scope => 'refinery.testimonials.admin.testimonials.actions')
     fill_in "Name", :with => from
-    page.execute_script("WYMEditor.INSTANCES[0].html('<p>#{quote}</p>')")
+    page.execute_script("WYMEditor_0.html('<p>#{quote}</p>')")
     click_button "Save"
   end
 
@@ -16,7 +16,7 @@ shared_examples_for 'Allows a testimonial to be added' do
   -> {
     click_link ::I18n.t('create_new', :scope => 'refinery.testimonials.admin.testimonials.actions')
     fill_in "Name", :with => from
-    page.execute_script("WYMEditor.INSTANCES[0].html('<p>#{quote}</p>')")
+    page.execute_script("WYMEditor_0.html('<p>#{quote}</p>')")
     click_button "Save"
     }
   }
@@ -33,12 +33,12 @@ shared_examples_for 'Allows a testimonial to be added' do
     end
   end
 
-  it 'displays a success message' do
+  it 'displays a success message', js: true do
     add_testimonial('My first Testimonial', 'Quote')
     expect(page).to have_content("'Quote by My first Testimonial' was successfully added.")
   end
 
-  it 'adds actions for the new testimonial' do
+  it 'adds actions for the new testimonial', js: true do
     add_testimonial('My first Testimonial', 'Quote')
 #       need to locate these for the exact testimonial
     expect(page.html).to include('Remove this testimonial forever')
@@ -46,8 +46,8 @@ shared_examples_for 'Allows a testimonial to be added' do
     expect(page.html).to include('/refinery/testimonials/testimonials/1/edit')
   end
 
-  it 'saves a new testimonial' do
-    expect(adding_a_testimonial).to change(Refinery::Testimonials::Testimonial.count).by(1)
+  it 'saves a new testimonial', js: true do
+    expect(adding_a_testimonial('Name', 'Quote')).to change(Refinery::Testimonials::Testimonial.count).by(1)
   end
 
 end

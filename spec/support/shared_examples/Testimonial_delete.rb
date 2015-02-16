@@ -1,7 +1,7 @@
 shared_examples_for 'Allows a testimonial to be deleted' do
   context 'When a testimonial can be deleted' do
     before do
-      build_testimonial('Delete me', 'Quote me')
+      FactoryGirl.build(:testimonial, name: 'Delete me', quote: 'Quote me')
     end
 
     it 'Will show delete button' do

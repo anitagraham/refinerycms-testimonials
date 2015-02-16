@@ -8,7 +8,9 @@ end
 ENGINE_PATH = File.dirname(__FILE__)
 APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
 
-load 'rails/tasks/engine.rake' if File.exists?(APP_RAKEFILE)
+if File.exists?(APP_RAKEFILE)
+  load 'rails/tasks/engine.rake'
+end
 
 require "refinerycms-testing"
 Refinery::Testing::Railtie.load_dummy_tasks(ENGINE_PATH)
