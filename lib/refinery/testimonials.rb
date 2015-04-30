@@ -5,7 +5,6 @@ module Refinery
 
   module Testimonials
     require 'refinery/testimonials/engine'
-    # require 'refinery/testimonials/extension'
 
     class << self
       attr_writer :root

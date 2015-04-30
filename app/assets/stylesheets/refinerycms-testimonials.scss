@@ -1,6 +1,7 @@
 .testimonials {
   list-style: none inside none;
   .testimonial {
+    .teaser {display:none}
     cite {font-style:normal;}
     blockquote {
       margin:0 0 14px;
@@ -9,4 +10,7 @@
     }
   }
 }
-
+ul.tab-list {
+  padding:0;
+  margin: 20px 0 0;
+}

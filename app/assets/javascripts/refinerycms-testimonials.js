@@ -4,7 +4,8 @@ jQuery(function() {
 	// control_field.button();
 	input_fields.buttonset();
 	$('input#page_testimonials_show').on('change', function(){
-		var disabled = !this.checked
-		input_fields.each(function() {$(this).attr('disabled', disabled)})
-	})
-})
+		var disabled = !this.checked;
+		input_fields.each(function() {$(this).attr('disabled', disabled);});
+	});
+	$('#testimonial-tabs').tabs();
+});

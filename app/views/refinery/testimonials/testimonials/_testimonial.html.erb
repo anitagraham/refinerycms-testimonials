@@ -1,5 +1,9 @@
-<li class="<%= testimonial.received_channel%>">
+<div class="<%= testimonial.received_channel%>">
+  <span class='channel'><%= testimonial.received_channel%></span>
   <span class="testimonial_date"><%=testimonial.received_date%></span>
+  <section class='teaser'>
+    <%= raw testimonial.teaser%>
+  </section>
   <blockquote>
     <p><%= raw(testimonial.quote) %></p>
       <cite>
@@ -8,4 +12,4 @@
         <span class="testimonial_company"><%= link_to_unless testimonial.website.blank?, testimonial.company, testimonial.website  %></span>
       </cite>
     </blockquote>
-</li>
+</div>

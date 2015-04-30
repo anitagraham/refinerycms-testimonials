@@ -9,7 +9,7 @@ module Refinery
         protected
 
         def testimonial_params
-          params.require(:testimonial).permit(:name, :quote, :company, :job_title, :website, :received_date, :received_channel, :position)
+          params.require(:testimonial).permit(:name, :quote, :teaser, :company, :job_title, :website, :received_date, :received_channel, :position)
         end
       end
     end
