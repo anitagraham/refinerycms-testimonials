@@ -20,11 +20,6 @@ module Refinery
         !@collection.blank?
       end
 
-      def wrap_content_in_tag(content)
-        content_tag(content_wrapper_tag.to_sym, content,  id: id)
-      end
-
-
       private
 
       def content_html(can_use_fallback)
