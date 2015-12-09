@@ -10,3 +10,5 @@ Refinery::I18n.frontend_locales.each do |lang|
     end
   end
 end
+# Added by Refinery CMS Pages extension
+Refinery::Pages::Engine.load_seed

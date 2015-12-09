@@ -11,15 +11,10 @@ module Refinery
         define_method("#{meth}?") { channels == index }
       end
 
-      attr_accessible :name, :quote, :company, :job_title, :website, :received_date, :received_channel, :position, :display
-
-      acts_as_indexed :fields => [:name, :company]
+       acts_as_indexed :fields => [:name, :company]
 
       validates :name, :presence => true, :uniqueness => true
       validates :quote, :presence => true
-
-      scope :recent, lambda { |n| order('created_at DESC').limit(n)}
-      scope :random, lambda { |n| order('RAND()').limit(n)}
 
       def flash_name
         "Quote by #{self.name}"

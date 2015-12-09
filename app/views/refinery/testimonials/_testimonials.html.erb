@@ -1,7 +1,5 @@
-<% if testimonials %>
-  <section id="testimonials">
-    <ul>
-      <%= render testimonials %>
-    </ul>
-  </section>
-<%end%>
+  <% if @page.testimonials %>
+    <section id="testimonials">
+      <%= render @page.testimonials %>
+    </section>
+  <%end%>

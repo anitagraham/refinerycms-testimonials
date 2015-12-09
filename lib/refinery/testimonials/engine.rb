@@ -17,10 +17,6 @@
           plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.testimonials_admin_testimonials_path }
           plugin.pathname = root
           plugin.menu_match = %r{refinery/testimonials/testimonials}
-          plugin.activity = {
-            :class_name => Refinery::Testimonials::Testimonial,
-            :title =>  'name'
-          }
         end
       end
 
@@ -29,7 +25,7 @@
         Refinery::Pages::Tab.register do |tab|
           register_testimonials tab
         end
-
+        require 'refinery/collection_presenter'
         require 'refinery/testimonial_item_presenter'
       end
     end
