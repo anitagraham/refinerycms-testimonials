@@ -1,0 +1,44 @@
+fr:
+  refinery:
+    plugins:
+      refinery_testimonials:
+        title: Témoignages
+        description: Créer et gérer des témoignages pour votre site
+    testimonials:
+      admin:
+        testimonials:
+          tabs:
+            testimonial_control:
+              testimonials_show: Afficher les témoignages
+              testimonials_show_label: Afficher les témoignages sur cette page. Utiliser les options en-dessous pour contrôler quels témoignages sont affichés.
+              testimonials_show_help: Cocher cette case si vous voulez faire apparaître les témoignages sur cette page.
+              testimonials_count: Combien de témoignages devraient apparaître sur cette page (0 pour tous) ?
+              testimonials_count_help: Entrer le nombre de témoignages qui doivent apparaître sur cette page.
+              testimonials_select: Quels témoignages devraient apparaître sur cette page ?
+              testimonials_select_help: Si vous sélectionnez Aléatoire, les témoignages seront affichés aléatoirement. Si vous sélectionnez Récent, ils seront affichés par le plus récent en premier.
+              select_testimonals_by: Sélectionnez les témoignages par
+              by_date: Par date (Récent en premier)
+              random: Aléatoire
+          records:
+            title: Témoignages
+            no_items_yet: Il n'y a aucun témoignage.
+          actions:
+            create_new: Ajouter un nouveau témoignage
+            reorder: Réorganiser les témoignages
+            reorder_done: Fin de la réorganisation des témoignages
+          testimonial:
+            edit: Modifier ce témoignage
+            delete: Supprimer ce témoignage
+  activerecord:
+    models:
+      refinery/testimonials/testimonial: Témoignages
+    attributes:
+      refinery/testimonials/testimonial:
+        company: Compagnie
+        job_title: Profession
+        quote: Citation
+        name: Nom
+        received_channel: Canal de réception
+        received_date: Date de réception
+        teaser: Résumé
+        website: Site internet
