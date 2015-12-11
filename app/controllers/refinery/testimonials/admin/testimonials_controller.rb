@@ -4,7 +4,10 @@ module Refinery
       class TestimonialsController < ::Refinery::AdminController
 
         crudify :'refinery/testimonials/testimonial',
-                :title_attribute => :flash_name
+                title_attribute: :flash_name,
+                include: [:translations]
+
+        helper :'refinery/testimonials/admin'
 
         protected
 

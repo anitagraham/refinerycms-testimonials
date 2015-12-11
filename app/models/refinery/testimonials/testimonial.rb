@@ -1,7 +1,11 @@
+require 'randumb'
+
 module Refinery
   module Testimonials
     class Testimonial < Refinery::Core::BaseModel
       self.table_name = "refinery_testimonials"
+
+      translates :name, :quote, :teaser, :job_title, :website
 
       # Constants for how to show the testimonials
       ORDER = %w[Random Recent]
@@ -11,7 +15,7 @@ module Refinery
         define_method("#{meth}?") { channels == index }
       end
 
-       acts_as_indexed :fields => [:name, :company]
+      acts_as_indexed :fields => [:name, :company]
 
       validates :name, :presence => true, :uniqueness => true
       validates :quote, :presence => true

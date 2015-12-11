@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.add_dependency    %q{decorators},        %q{~> 2.0.0}
   s.add_dependency    %q{globalize},         %q{~> 5.0}
   s.add_dependency    %q[randumb]
+  s.add_dependency %q{friendly_id}, %q{~> 5.1.0}
+  s.add_dependency %q{friendly_id-globalize}, %q{>= 1.0.0.alpha2}
 
   # Development dependencies (usually used for testing)
   s.add_development_dependency %q{refinerycms-testing}

@@ -1,14 +1,29 @@
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(testimonial) -%>">
   <span class='title'>
-    <%= testimonial.name %>
+    <%= title_with_translations testimonial %>
+    <span class="preview">
+      <% if Refinery::I18n.frontend_locales.many? %>
+        <span class='locales'>
+          <% testimonial.translations.sort_by{ |t| Refinery::I18n.frontend_locales.index(t.locale)}.each do |translation| %>
+            <% if translation.name.present? %>
+              <%= link_to refinery.edit_testimonials_admin_testimonial_path(testimonial, :switch_locale => translation.locale), :class => 'locale', title: translation.locale.upcase do %>
 
+                <div class="<%=translation.locale %> locale_marker">
+                  <%= locale_text_icon(translation.locale.upcase) %>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </span>
+      <% end %>
+    </span>
   </span>
   <span class='actions'>
-    
+
     <!-- <%= #link_to refinery_icon_tag("application_go.png"), refinery.testimonials_testimonial_path(testimonial),
          #:title => t('.view_live_html'),
         #:target => "_blank"
-         %> -->    
+         %> -->
     <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_testimonials_admin_testimonial_path(testimonial),
          :title => t('.edit') %>
     <%= link_to refinery_icon_tag("delete.png"), refinery.testimonials_admin_testimonial_path(testimonial),
