@@ -2,10 +2,9 @@ source "http://rubygems.org"
 
 gemspec
 
-gem 'refinerycms', '~>2.1.0'
-gem 'refinerycms-i18n', '~>2.1.0'
-gem 'rails', '3.2.13'
-gem 'randumb'
+gem 'refinerycms', '~> 4.0', '>= 4.0.3'
+gem 'refinerycms-i18n', '>=5.0'
+gem 'rails', '5.2'
 gem 'acts_as_indexed'
 gem 'mustache'
 
@@ -23,10 +22,6 @@ platforms :ruby do
   gem 'pg'
 end
 
-group :development do
-  gem 'rails-footnotes', '>= 3.7.9'
-  gem 'meta_request', '0.2.1'
-end
 
 group :development, :test do
   unless ENV['TRAVIS']
@@ -35,9 +30,8 @@ group :development, :test do
     gem 'rspec-set'
   end
 
-  # gem 'capybara-webkit'
+
   gem 'launchy'
-  gem 'rspec-rails'
 
   platforms :mswin, :mingw do
     gem 'win32console', '~> 1.3.0'
