@@ -1,38 +1,59 @@
-<div class='wym_skin_refinery page_part' id='page_testimonial_control'>
+<div class='wym_skin_refinery page_part' id='page_testimonial_control' >
 
-  <div class='field enable'>
-    <span class='label_with_help'>
+  <div class='field enable' >
+    <span class='label_with_help' >
       <%= f.label :testimonials_show?, t('.testimonials_show') %>
       <%= refinery_help_tag t('.testimonials_show_help') %>
-    </span>
-    <%= f.check_box :testimonials_show, {}, true, false  %>
+    </span >
+    <%= f.check_box :testimonials_show, {}, true, false %>
     <%= f.label :testimonials_show, t('.testimonials_show_label'), :class => 'stripped' %>
-  </div>
+  </div >
 
-  <div class='fields'>
-    <div class='field'>
-      <span class='label_with_help'> <%= f.label :testimonials_count, t('.testimonials_count')%>
-        <%= refinery_help_tag t('.testimonials_count_help')%> </span>
-      <%= f.number_field :testimonials_count  %>
-    </div>
+  <div class='fields' >
+    <fieldset id="count" >
+      <legend >How Many Testimonials to Show</legend >
+      <div class="field_group">
+        <span class='label_with_help' >
+          <%= label_tag :count_all, t(".testimonials_count_options_all") %>
+          <%= radio_button_tag(:count, "All") %>
+        </span >
+        <span class='label_with_help' >
+          <%= label_tag(:count_some, t(".testimonials_count_options_some")) %>
+          <%= radio_button_tag(:count, "Some") %>
+        </span >
+      </div>
+      <span class='label_with_help' > <%= f.label :testimonials_count, t('.testimonials_count') %>
+        <%= refinery_help_tag t('.testimonials_count_help') %>
+      </span >
+      <%= f.number_field :testimonials_count, disabled: @page.testimonials_count==0 %>
+    </fieldset>
 
-    <div class='field'>
-      <span class='label_with_help'>
+    <fieldset id="select">
+      <legend > Selecting Testimonals By</legend >
+      <span class='label_with_help' >
         <%= f.label :testimonials_select, t('.testimonials_select') %>
         <%= refinery_help_tag t('.testimonials_select_help') %>
-      </span>
-      <p>
-        Select Testimonals By
-      </p>
-      <%= f.radio_button  :testimonials_select,  'Recent' %>
-      <%= f.label :testimonials_select, 'By date (Recent first)', :value=> 'Recent', :class=>'stripped'%>
-      <br />
-      <%= f.radio_button  :testimonials_select,  'Random' %>
-      <%= f.label :testimonials_select, 'Random', :value => 'Random', :class=>'stripped' %>
-    </div>
+      </span >
+
+      <div class="field_group" >
+        <%= f.radio_button :testimonials_select, 'Recent' %>
+        <%= f.label :testimonials_select, 'By date (Recent first)', :value => 'Recent', :class => 'stripped' %>
+        <%= f.radio_button :testimonials_select, 'Random' %>
+        <%= f.label :testimonials_select, 'Random', :value => 'Random', :class => 'stripped' %>
+      </div >
+    </fieldset >
+
+    <fieldset id="format" >
+      <legend >Full Testimonials or Extracts?</legend >
+      <div class="field_group" >
+        <%= f.radio_button :testimonials_format, 'Full' %>
+        <%= f.label :testimonials_format, 'Complete Testimonials', :value => 'Full', :class => 'stripped' %>
+        <%= f.radio_button :testimonials_format, 'Extract' %>
+        <%= f.label :testimonials_format, 'Extracts', :value => 'Extract', :class => 'stripped' %>
+      </div >
+    </fieldset >
   </div>
 </div>
-<% content_for :stylesheets, stylesheet_link_tag('refinery/testimonials')
-%>
+<% content_for :stylesheets, stylesheet_link_tag('refinery/testimonials') %>
 <% content_for :javascripts, javascript_include_tag('testimonials') %>
 

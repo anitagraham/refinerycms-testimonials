@@ -4,20 +4,28 @@ module Refinery
       self.table_name = "refinery_testimonials"
 
       # Constants for how to show the testimonials
-      ORDER = %w[Random Recent]
-      CHANNELS = %w[Letter Email Facebook Twitter]
+      ORDER = %w[Random Recent].freeze
+      CHANNELS = %w[Letter Email Facebook Twitter].freeze
 
       CHANNELS.each_with_index do |meth, index|
         define_method("#{meth}?") { channels == index }
       end
 
-      acts_as_indexed :fields => [:name, :company]
+      acts_as_indexed fields: [:name, :company]
+      validates :name, presence: true, uniqueness: true
+      validates :quote, presence: true
 
-      validates :name, :presence => true, :uniqueness => true
-      validates :quote, :presence => true
+      scope :random, -> {  order(Arel.sql('RANDOM()'))}
+      scope :recent, -> { order('created_at DESC') }
+      scope :with_excerpt, -> { where.not(excerpt: ["", nil]) }
 
-      scope :recent, lambda { |n| order('created_at DESC').limit(n)}
-      scope :random, lambda { |n| order('RAND()').limit(n)}
+      def extract
+        {
+          id: id,
+          name: name,
+          quote: excerpt
+        }
+      end
 
       def flash_name
         "Quote by #{self.name}"

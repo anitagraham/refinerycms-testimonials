@@ -5,9 +5,7 @@
       <cite>
         <%= testimonial.name %>
         <span class="testimonial_jobtitle"><%=testimonial.job_title%></span>
-        <span class="testimonial_company">
-          <%= link_to_unless testimonial.website.blank?, testimonial.company, testimonial.website  %>
-        </span>
+        <span class="testimonial_company"><%= link_to_unless testimonial.website.blank?, testimonial.company, testimonial.website  %></span>
       </cite>
     </blockquote>
 </div>

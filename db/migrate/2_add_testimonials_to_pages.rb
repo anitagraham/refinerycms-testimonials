@@ -1,4 +1,4 @@
-class AddTestimonialsToPages < ActiveRecord::Migration
+class AddTestimonialsToPages < ActiveRecord::Migration[4.2]
 
   def change
     change_table :refinery_pages do |t|

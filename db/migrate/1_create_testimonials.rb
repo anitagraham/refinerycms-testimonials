@@ -1,4 +1,4 @@
-class CreateTestimonials < ActiveRecord::Migration
+class CreateTestimonials < ActiveRecord::Migration[4.2]
 
   def up
     create_table :refinery_testimonials do |t|

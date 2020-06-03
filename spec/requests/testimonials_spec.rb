@@ -7,7 +7,7 @@ require 'i18n'
 module Refinery
   module  Admin
     describe 'Testimonials' do
-      refinery_login_with :refinery_user
+      refinery_login
 
       context 'At all times' do
         it 'has a Testimonials Tab' do

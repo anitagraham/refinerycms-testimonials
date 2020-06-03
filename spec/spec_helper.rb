@@ -1,145 +1,83 @@
+$VERBOSE = ENV['VERBOSE'] || false
+
 require 'rubygems'
-require 'spork'
-require 'factory_girl'
-#uncomment the following line to use spork with the debugger
-#require 'spork/ext/ruby-debug'
 
-Spork.prefork do
-  # Loading more in this block will cause your tests to run faster. However,
-  # if you change any configuration or code from libraries loaded here, you'll
-  # need to restart spork for it take effect.
+ENGINE_RAILS_ROOT = File.join(File.dirname(__FILE__), '../') unless defined?(ENGINE_RAILS_ROOT)
 
+# Configure Rails Environment
+ENV["RAILS_ENV"] ||= 'test'
+
+if ENV['TRAVIS']
+  require 'coveralls'
+  Coveralls.wear!
 end
 
-Spork.each_run do
-  # This code will be run each time you run your specs.
+require File.expand_path("../dummy/config/environment", __FILE__)
 
-end
+require 'rspec/rails'
+require 'capybara/rspec'
+require 'webdrivers/chromedriver'
 
-def setup_environment
-  # Configure Rails Environment
-  ENV["RAILS_ENV"] = 'test'
-
-  unless ENV['COVERAGE'] || ENV['TRAVIS']
-    require 'simplecov'
-    SimpleCov.start 'rails'
-  end
-
-  if File.exist?(dummy_path = File.expand_path('../dummy/config/environment.rb', __FILE__))
-    require dummy_path
-  elsif File.dirname(__FILE__) =~ %r{vendor/extensions}
-    # Require the path to the refinerycms application this is vendored inside.
-    require File.expand_path('../../../../../config/environment', __FILE__)
-  end
-
-  require 'rspec/rails'
-  require 'capybara/rspec'
-
-  Rails.backtrace_cleaner.remove_silencers!
-
-  Capybara.javascript_driver = :webkit
-
+if ENV['RETRY_COUNT']
+  require 'rspec/retry'
   RSpec.configure do |config|
-    config.mock_with :rspec
-    config.treat_symbols_as_metadata_keys_with_true_values = true
-    config.filter_run :focus => true
-    config.run_all_when_everything_filtered = true
+    # rspec-retry
+    config.verbose_retry = true
+    config.default_sleep_interval = 0.33
+    config.clear_lets_on_failure = true
+    config.default_retry_count = ENV["RETRY_COUNT"]
   end
 end
 
-def each_run
-  if ENV['COVERAGE'] && !ENV['TRAVIS']
-    require 'simplecov'
-    SimpleCov.start 'rails'
-  end
+Rails.backtrace_cleaner.remove_silencers!
 
-  Rails.cache.clear
-  ActiveSupport::Dependencies.clear
-  FactoryGirl.reload
+RSpec.configure do |config|
+  config.mock_with :rspec
+  config.filter_run :focus => true
+  config.filter_run :js => true if ENV['JS'] == 'true'
+  config.filter_run :js => nil if ENV['JS'] == 'false'
+  config.run_all_when_everything_filtered = true
+  config.include ActionView::TestCase::Behavior, :file_path => %r{spec/presenters}
+  config.infer_spec_type_from_file_location!
 
-  # Requires supporting files with custom matchers and macros, etc,
-  # in ./support/ and its subdirectories including factories.
-  ([Rails.root.to_s] | ::Refinery::Plugins.registered.pathnames).map{|p|
-    Dir[File.join(p, 'spec', 'support', '**', '*.rb').to_s]
-  }.flatten.sort.each do |support_file|
-    require support_file
-  end
-end
+  config.use_transactional_fixtures = true
 
-# If spork is available in the Gemfile it'll be used but we don't force it.
-unless (begin; require 'spork'; rescue LoadError; nil end).nil? || ENV['TRAVIS']
-  Spork.prefork do
-    # Loading more in this block will cause your tests to run faster. However,
-    # if you change any configuration or code from libraries loaded here, you'll
-    # need to restart spork for it take effect.
-    setup_environment
-  end
-
-  Spork.each_run do
-    # This code will be run each time you run your specs.
-    each_run
-  end
-else
-  setup_environment
-  each_run
-end
-
-
-def build_testimonial(from, quote, date=Date.today)
-  Refinery::Testimonials::Testimonial.create :name => from, :quote=>quote, :received_date=>date
-end
-
-def add_testimonial(from, quote)
-  click_link ::I18n.t('create_new', :scope => 'refinery.testimonials.admin.testimonials.actions')
-  fill_in "Name", :with => from
-  page.execute_script("WYMeditor.INSTANCES[0].html('<p>#{quote}</p>')")
-  click_button "Save"
-end
-
-def create_page(title)
-  Refinery::Page.create :title => title
-end
-
-
-RSpec::Matchers.define :each do |meta|
-  match do |actual|
-    actual.each_with_index do |i, j|
-      @elem = j
-      i.should meta
+  config.when_first_matching_example_defined(type: :system) do
+    config.before :suite do
+      # Preload assets
+      # This should avoid capybara timeouts, and avoid counting asset compilation
+      # towards the timing of the first feature spec.
+      Rails.application.precompiled_assets
     end
   end
 
-  failure_message_for_should do |actual|
-    "at[#{@elem}] #{meta.failure_message_for_should}"
+  config.before(:each) do
+    ::I18n.default_locale = I18n.locale = Mobility.locale = :en
   end
+
+  config.before(:each, type: :system) do
+    driven_by :rack_test
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1080]
+  end
+
+  unless ENV['FULL_BACKTRACE']
+    config.backtrace_exclusion_patterns = %w(
+      rails actionpack railties capybara activesupport rack warden rspec actionview
+      activerecord dragonfly benchmark quiet_assets rubygems
+    ).map { |noisy| /\b#{noisy}\b/ }
+  end
+
+  # Store last errors so we can run rspec with --only-failures
+  config.example_status_persistence_file_path = ".rspec_failures"
 end
 
-
-RSpec::Matchers.define :be_ordered_by do |attribute|
-  match do |actual|
-    result = true
-    reverse_indicator = "_desc"
-    if attribute =~ /#{reverse_indicator}/
-      symbol = attribute.gsub(/#{reverse_indicator}/,'').to_sym
-      sorted = actual.sort{ |a,b| b.send(symbol) <=> a.send(symbol)}
-    else
-      sorted = actual.sort{ |a,b| a.updated_at <=> b.updated_at}
-    end
-    sorted.each_with_index do |a,i|
-      result = false unless actual[i] == a
-    end
-  result # return true or false for this matcher.
-  end
-
-  failure_message_for_should do |actual|
-    "expected that #{actual} would be sorted by #{attribute}"
-  end
-
-  failure_message_for_should_not do |actual|
-    "expected that #{actual} would not be sorted by #{attribute}"
-  end
-
-  description do
-    "be a sorted by #{attribute}"
-  end
+# Requires supporting files with custom matchers and macros, etc,
+# in ./support/ and its subdirectories including factories.
+([ENGINE_RAILS_ROOT, Rails.root.to_s].uniq | Refinery::Plugins.registered.pathnames).map{ |p|
+  Dir[File.join(p, 'spec', 'support', '**', '*.rb').to_s]
+}.flatten.sort.each do |support_file|
+  require support_file
 end

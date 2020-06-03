@@ -2,14 +2,10 @@
   module Testimonials
     class Engine < Rails::Engine
       include Refinery::Engine
+
       isolate_namespace Refinery::Testimonials
 
       engine_name :refinery_testimonials
-
-      def self.register_testimonials(tab)
-        tab.name = 'testimonials'
-        tab.partial = '/refinery/testimonials/admin/testimonials/tabs/testimonial_control'
-      end
 
       before_inclusion do
         Refinery::Plugin.register do |plugin|
@@ -17,20 +13,33 @@
           plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.testimonials_admin_testimonials_path }
           plugin.pathname = root
           plugin.menu_match = %r{refinery/testimonials/testimonials}
-          plugin.activity = {
-            :class_name => Refinery::Testimonials::Testimonial,
-            :title =>  'name'
-          }
         end
       end
 
+      def self.register_testimonials(tab)
+        tab.name = 'testimonials'
+        tab.partial = '/refinery/testimonials/admin/testimonials/tabs/testimonial_control'
+      end
+
       config.after_initialize do
-        Refinery.register_engine(Refinery::Testimonials)
+        tabs = [
+          {title: 'Testimonial', partial: 'visual_editor_text', fields: [:quote]},
+          {title: 'Excerpt',     partial: 'visual_editor_text', fields:[:excerpt]},
+        ]
+        tabs.each do |t|
+          Refinery::Testimonials::Tab.register do |tab|
+            tab.name = t[:title]
+            tab.partial = "/refinery/testimonials/admin/testimonials/tabs/#{t[:partial]}"
+            tab.fields = t[:fields]
+          end
+        end
+
+        # We have a tab in the Page editor as well
         Refinery::Pages::Tab.register do |tab|
           register_testimonials tab
         end
-
-        require 'refinery/testimonial_item_presenter'
+        Refinery.register_extension(Refinery::Testimonials)
+        require 'refinery/pages/testimonial_item_presenter'
       end
     end
   end
