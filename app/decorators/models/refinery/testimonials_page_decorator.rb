@@ -1,12 +1,12 @@
 # Open the Refinery::Page model for manipulation
 Refinery::Page.class_eval do
 
-  VALID_FORMAT_NAMES = %w(full extract).freeze
-  VALID_SELECT_OPTIONS = %w(recent random).freeze
+  valid_format_names = %w(full extract).freeze
+  valid_select_options = %w(recent random).freeze
 
-  validates :testimonials_format, inclusion: { in: VALID_FORMAT_NAMES,
+  validates :testimonials_format, inclusion: { in: valid_format_names,
                                                message: "%{value} must be one of %{valid_format_names}" }
-  validates :testimonials_select, inclusion: { in: VALID_SELECT_OPTIONS,
+  validates :testimonials_select, inclusion: { in: valid_select_options,
                                                message: "%{value} must be one of %{valid_select_options}" }
   attr_reader :testimonials
 
