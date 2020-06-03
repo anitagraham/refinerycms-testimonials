@@ -13,10 +13,11 @@ Refinery::Page.class_eval do
   def testimonials
     return if @testimonials
     return unless testimonials_show
+    testimonials = Refinery::Testimonials::Testimonial
+    testimonials = testimonials.with_excerpt if testimonials_format == 'extract'
     testimonials = Refinery::Testimonials::Testimonial.random if testimonials_select == 'random'
     testimonials = Refinery::Testimonials::Testimonial.recent if testimonials_select == 'recent'
-    testimonials = Refinery::Testimonials::Testimonial.with_excerpt if testimonials_format == 'extract'
-    testimonials = testimonials.limit(testimonials_count) unless testimonials_count&.zero? # (or null)
+    testimonials = testimonials.limit(testimonials_count) unless (testimonials_count&.zero? || testimonials.count.zero?) # (or null)
 
     @testimonials = testimonials_format == 'extract' ? testimonials.map(&:extract) : testimonials
   end
