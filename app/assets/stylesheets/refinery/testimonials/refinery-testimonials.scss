@@ -1,0 +1,47 @@
+
+#page_testimonial_control {
+  font-size : 1rem !important;
+  .hide { display: none;}
+  .show { display : unset}
+  fieldset {
+    margin-top : 1rem;
+    legend { font-weight : bold; color : darkslategray}
+  }
+  #testimonials_show {
+    border-bottom: 3px double;
+  }
+
+  .fields {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    line-height : 1;
+    fieldset {
+      flex-grow: 1;
+    }
+    .field_group {
+      display :flex;
+      flex-direction : column;
+      .label_with_help, label { margin-top : 3px;}
+    }
+  }
+  label { display : inline-block}
+  &[disabled='disabled'] {background-color : grey}
+}
+
+  input[type=radio]:checked + label:before {
+    &[disabled='disabled'] {background-color : grey}
+}
+
+  input[type=radio]:checked + label:after {
+    font-weight : bold;
+  }
+
+input[type=checkbox] {
+  label { display : inline-block}
+
+  &:checked + label:after {
+    font-weight : bold;
+  }
+}
+

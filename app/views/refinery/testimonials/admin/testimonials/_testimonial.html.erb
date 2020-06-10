@@ -2,9 +2,13 @@
   <span class='title'>
     <%= testimonial.name || testimonial.id %>
   </span>
+  <% if testimonial.company.present? %>
+    <span> (<%= testimonial.company %>)</span>
+  <% end %>
   <span class='actions'>
+    <% title = t('.edit') %>
     <%= action_icon :edit, refinery.edit_testimonials_admin_testimonial_path(testimonial),
-                    title: t('.edit') %>
+                    title: title %>
 
     <%= action_icon :delete,
                     refinery.testimonials_admin_testimonial_path(testimonial),
@@ -16,3 +20,4 @@
                     method: :delete -%>
   </span>
 </li>
+

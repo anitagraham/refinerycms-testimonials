@@ -11,7 +11,7 @@ Refinery::Page.class_eval do
   attr_accessor :testimonials
 
   def testimonials
-    count = testimonials_count.zero? ? 100 : testimonials_count
+    count = testimonials_count.zero? ? 500 : testimonials_count
     return unless testimonials_show
     Refinery::Testimonials::Testimonial
       .format(testimonials_format)

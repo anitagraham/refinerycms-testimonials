@@ -9,14 +9,13 @@
   <div class='field'>
     <%= f.label :name %>
     <%= f.text_field :name, class: 'larger widest'  %>
-
   </div>
 
   <div class='field'>
     <div id='page-tabs' class='clearfix'>
       <ul id='page_parts'>
         <% ::Refinery::Testimonials.tabs.each_with_index do |tab, tab_index| %>
-          <li class= '<%= TestimonialsHelper.tab_classes(tab, tab_index, @testimonial.warnings) %>'>
+          <li >
             <%= link_to tab.name.titleize, "\#tab_#{tab_index}_editor" %>
           </li>
         <% end %>
@@ -29,38 +28,22 @@
         <% end %>
       </div>
     </div>
-
   </div>
 
-  <div class='field'>
-    <%= f.label :company %>
-    <%= f.text_field :company  %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :job_title %>
-    <%= f.text_field :job_title  %>
-  </div>
-
-  <div class='field'>
-    <%= f.label :website %>
-    <%= f.text_field :website  %>
-  </div>
 
   <div class='field'>
     <%= f.label :received_date %>
     <%= f.date_select :received_date, order: [:day, :month, :year], prompt: true   %>
   </div>
 
-	<div class="field">
-		<%= f.label :received_channel %>
-		<%= f.select :received_channel, Refinery::Testimonials::Testimonial::CHANNELS  %>
-	</div>
+  <div class="field">
+    <%= f.label :received_channel %>
+    <%= f.select :received_channel, Refinery::Testimonials::Testimonial::CHANNELS  %>
+  </div>
 
   <div class='field'>
     <%= f.label :position %>
     <%= f.number_field :position  %>
-
   </div>
 
   <%= render '/refinery/admin/form_actions', f: f,

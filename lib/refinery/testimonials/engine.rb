@@ -25,6 +25,9 @@
         tabs = [
           {title: 'Testimonial', partial: 'visual_editor_text', fields: [:quote]},
           {title: 'Excerpt',     partial: 'visual_editor_text', fields:[:excerpt]},
+          {title: 'Client Details',  partial: 'visual_editor_string_fields',
+            fields:[:company, :position, :job_title, :website ]},
+
         ]
         tabs.each do |t|
           Refinery::Testimonials::Tab.register do |tab|
