@@ -16,13 +16,10 @@ module Refinery
       validates :name, presence: true, uniqueness: true
       validates :quote, presence: true
 
-      # scope :choose_by, -> ( om) {  om === 'recent' ? self.recent : self.random  }
-      scope :format, -> (exc) { where.not(excerpt: ["", nil]) if exc === 'extract'}
 
-      def recent
-        Rails.logger.debug(". . . . #{__FILE__}/#{__method__}looking for recent testimonials")
-        order( received_at: :desc)
-      end
+      scope :random_order, -> (really) { order(Arel.sql('RANDOM()')) if really }
+      scope :format, -> (exc) { where.not(excerpt: ["", nil]) if exc === 'extract'}
+      scope :most_recent, -> () { order(received_at: :desc)}
 
       # def random
       #   order(Arel.sql('RANDOM()'))
