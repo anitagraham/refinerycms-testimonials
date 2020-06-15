@@ -3,7 +3,7 @@ module Refinery
     class Version
       @major = 4
       @minor = 0
-      @tiny  = 0
+      @tiny  = 1
       @build = ''
 
       class << self
