@@ -1,5 +1,8 @@
- module Refinery
+# frozen_string_literal: true
+
+module Refinery
   module Testimonials
+    # Standard Rails Engine
     class Engine < Rails::Engine
       include Refinery::Engine
 
@@ -23,10 +26,10 @@
 
       config.after_initialize do
         tabs = [
-          {title: 'Testimonial', partial: 'visual_editor_text', fields: [:quote]},
-          {title: 'Excerpt',     partial: 'visual_editor_text', fields:[:excerpt]},
-          {title: 'Client Details',  partial: 'visual_editor_string_fields',
-            fields:[:company, :position, :job_title, :website ]},
+          { title: 'Testimonial', partial: 'visual_editor_text', fields: [:quote] },
+          { title: 'Excerpt',     partial: 'visual_editor_text', fields: [:excerpt] },
+          { title: 'Client Details', partial: 'visual_editor_string_fields',
+            fields: %i[company position job_title website] }
 
         ]
         tabs.each do |t|

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Refinery
   module Testimonials
-      class TestimonialsController < ::ApplicationController
+    # Controller for Testimonials
+    class TestimonialsController < ::ApplicationController
       respond_to :json, :html
-      crudify :'refinery/testimonials', order: 'received_date DESC'
-      end
     end
+  end
 end
