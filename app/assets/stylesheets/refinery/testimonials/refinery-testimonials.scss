@@ -1,11 +1,16 @@
 // testimonials index
-#records ul.testimonials {
+@import 'refinery/mixins/icon_base';
+@import 'refinery/mixins/icon';
+@import 'refinery/global/colours';
+@import 'font-awesome-sprockets', 'font-awesome';
+@import 'refinery/components/icons';
+
+#records ul {
   li.ok {
-    @extend .success_icon
+    @include icon('check', #8cf407)
   }
   li.warning {
-    @extend .warning_icon;
-    background-color: orange;
+   @include icon(warning, orange);
   }
 }
 

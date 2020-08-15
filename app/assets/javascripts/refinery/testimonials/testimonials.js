@@ -1,3 +1,4 @@
+// Used on the Refinery::Page edit screen, to handle testimonial control settings
 const formFields = {
   testimonialsTab: {id: 'page_testimonial_control'},
   fieldsets: {
@@ -34,9 +35,12 @@ const setVisibility = (key, show) => {
   })
 }
 
+const testimonialsInit = () => {
+     handleChange  // really set up the initial state]
+    let testimonialTab = document.getElementById(formFields.testimonialsTab.id)
+    if (testimonialTab) {
+      testimonialTab.addEventListener('change', handleChange)
+    }
+}
 
-$(document).ready(() => {
-  handleChange  // really set up the initial state
-  let testimonialTab = document.getElementById(formFields.testimonialsTab.id)
-  testimonialTab.addEventListener('change', handleChange)
-})
+$(document).ready(testimonialsInit)
