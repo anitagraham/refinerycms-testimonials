@@ -1,10 +1,6 @@
 <%= form_for [refinery, :testimonials_admin, @testimonial] do |f| %>
-  <%= render '/refinery/admin/error_messages',
-              object: @testimonial,
-              include_object_name: true %>
   <%= render '/refinery/admin/error_messages',   object: @testimonial, include_object_name: true %>
-  <%= render '/refinery/admin/warning_messages', object: @testimonial,
-             include_object_name: true unless @testimonial.sensible? %>
+  <%= render '/refinery/admin/warning_messages', object: @testimonial, include_object_name: true unless @testimonial.sensible? %>
 
   <div class='field'>
     <%= f.label :name %>

@@ -20,11 +20,15 @@ module Refinery
       validates :quote, presence: true
 
       scope :random_selection, ->(really) { order(Arel.sql('RANDOM()')) if really }
-      scope :format,           ->(exc) { where.not(excerpt: ['', nil]) if exc == 'extract' }
-      scope :most_recent,      -> { order(received_at: :desc) }
+      scope :format,           ->(exc) { where.not(excerpt: ['', nil]) if exc == 'excerpt' }
+      scope :most_recent,      -> { order(received_date: :desc) }
 
       def flash_name
         "Quote by #{name}"
+      end
+
+      warning do |testimonial|
+        testimonial.warnings.add(:excerpt, ": No excerpt written") unless testimonial.excerpt.present?
       end
     end
   end

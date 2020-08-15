@@ -7,9 +7,9 @@ Refinery::Page.class_eval do
 
     count = testimonials_count.zero? ? Refinery::Testimonials.page_maximum : testimonials_count
     Refinery::Testimonials::Testimonial
+      .format(testimonials_format)
       .random_selection(testimonials_select == 'random')
       .most_recent
-      .format(testimonials_format)
       .limit(count)
   end
 end

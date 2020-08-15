@@ -4,13 +4,12 @@ module Refinery
       @major = 4
       @minor = 0
       @tiny  = 1
-      @build = ''
 
       class << self
-        attr_reader :major, :minor, :tiny, :build
+        attr_reader :major, :minor, :tiny
 
         def to_s
-          [@major, @minor, @tiny, @build].compact.join('.')
+          [@major, @minor, @tiny].compact.join('.')
         end
       end
     end

@@ -1,3 +1,4 @@
+require File.expand_path('lib/refinery/testimonials/version', __dir__)
 version = Refinery::Testimonials::Version.to_s
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
@@ -13,7 +14,6 @@ Gem::Specification.new do |s|
   # Runtime dependencies
   s.add_dependency 'actionmailer',      '>= 5.1'
   s.add_dependency 'refinerycms-core',  ['>= 3.0.0', '< 5.0']
-  # s.add_dependency 'refinerycms-acts-as-indexed'
 
   s.required_ruby_version = '>= 2.2.2'
 end

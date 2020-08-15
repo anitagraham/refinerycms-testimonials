@@ -1,4 +1,5 @@
-<li class='record <%= cycle("on", "on-hover") %>' id="<%= dom_id(testimonial)%>">
+<% status = testimonial.sensible? ? :ok : :warning %>
+<li class='record <%= cycle("on", "on-hover") %> <%= status %>' id="<%= dom_id(testimonial)%>">
   <span class='title'>
     <%= testimonial.name || testimonial.id %>
   </span>

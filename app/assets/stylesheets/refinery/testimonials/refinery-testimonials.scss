@@ -1,3 +1,13 @@
+// testimonials index
+#records ul.testimonials {
+  li.ok {
+    @extend .success_icon
+  }
+  li.warning {
+    @extend .warning_icon;
+    background-color: orange;
+  }
+}
 
 #page_testimonial_control {
   font-size : 1rem !important;
@@ -44,4 +54,3 @@ input[type=checkbox] {
     font-weight : bold;
   }
 }
-
