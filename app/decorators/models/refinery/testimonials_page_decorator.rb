@@ -6,11 +6,12 @@ Refinery::Page.class_eval do
     return unless testimonials_show
 
     count = testimonials_count.zero? ? Refinery::Testimonials.page_maximum : testimonials_count
-    Refinery::Testimonials::Testimonial.i18n
-      .short(testimonials_format.downcase)
-      .random_selection(testimonials_select == 'random')
-      .most_recent
-      .limit(count)
+
+    testimonials = Refinery::Testimonials::Testimonial.i18n
+    testimonials = testimonials.has_excerpt? if testimonials_format == 'excerpt'
+    testimonials = testimonials.random_selection if testimonials_select.downcase == 'random'
+    testimonials = testimonials.most_recent if testimonials_select.downcase == 'recent'
+    @testimonials = testimonials.limit(count)
   end
 end
 

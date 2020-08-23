@@ -21,20 +21,17 @@ module Refinery
       validates :name, presence: true, uniqueness: true
       validates :quote, presence: true
 
-      scope :random_selection, ->(really) { order(Arel.sql('RANDOM()')) if really }
-      scope :short,            ->(format) { where.excerpt? if format.downcase == 'excerpt' }
-      scope :most_recent,      -> { order(received_date: :desc) }
+      scope :random_selection,  -> { order(Arel.sql('RANDOM()'))}
+      scope :has_excerpt?,      -> { where.not(excerpt: [nil,''])}
+      scope :most_recent,       -> { order(received_date: :desc) }
 
       def flash_name
         "Quote by #{name}"
       end
 
-      def excerpt?
-        excerpt.present?
-      end
-
       warning do |testimonial|
-        testimonial.warnings.add(:excerpt, ": No excerpt written") unless testimonial.excerpt?
+        testimonial.warnings.add(:excerpt, ": No excerpt written") unless testimonial.excerpt.present?
+        testimonial.warnings.add(:received_date, ": No date") unless testimonial.received_date
       end
     end
   end
