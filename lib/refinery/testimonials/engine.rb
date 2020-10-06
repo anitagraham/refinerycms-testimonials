@@ -15,7 +15,7 @@ module Refinery
           plugin.name = 'refinery_testimonials'
           plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.testimonials_admin_testimonials_path }
           plugin.pathname = root
-          plugin.menu_match = %r{refinery/testimonials/testimonials}
+          plugin.menu_match = %r{refinery/testimonials/testimonials(/.*)?$}
         end
       end
 

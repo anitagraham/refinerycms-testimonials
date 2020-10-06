@@ -28,13 +28,22 @@
 
 
   <div class='field'>
+    <% today = Date.today
+       default_date = 0.days.from_now
+       Rails.logger.debug default_date
+       selected = @testimonial.persisted? ? @testimonial.received_date : today
+
+    %>
+    <p>Today is <%= today %>.</p>
     <%= f.label :received_date %>
-    <%= f.date_select :received_date, order: [:day, :month, :year], prompt: true   %>
+    <%= f.date_select :received_date, selected: selected, order: [:day, :month, :year],
+                      default: today  %>
   </div>
 
   <div class="field">
+    <% selected = @testimonial.persisted? ? @testimonial.received_channel : 'Email' %>
     <%= f.label :received_channel %>
-    <%= f.select :received_channel, Refinery::Testimonials::Testimonial::CHANNELS  %>
+    <%= f.select :received_channel, Refinery::Testimonials::Testimonial::CHANNELS, selected: selected, default: 'Email'  %>
   </div>
 
   <div class='field'>
