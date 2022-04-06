@@ -1,6 +1,6 @@
 <%= form_for [refinery, :testimonials_admin, @testimonial] do |f| %>
   <%= render '/refinery/admin/error_messages',   object: @testimonial, include_object_name: true %>
-  <%= render '/refinery/admin/warning_messages', object: @testimonial, include_object_name: true unless @testimonial.sensible? %>
+  <%= render '/refinery/testimonials/admin/warning_messages', object: @testimonial, include_object_name: true unless @testimonial.sensible? %>
 
   <div class='field'>
     <%= f.label :name %>
@@ -30,11 +30,9 @@
   <div class='field'>
     <% today = Date.today
        default_date = 0.days.from_now
-       Rails.logger.debug default_date
        selected = @testimonial.persisted? ? @testimonial.received_date : today
 
     %>
-    <p>Today is <%= today %>.</p>
     <%= f.label :received_date %>
     <%= f.date_select :received_date, selected: selected, order: [:day, :month, :year],
                       default: today  %>
@@ -46,23 +44,9 @@
     <%= f.select :received_channel, Refinery::Testimonials::Testimonial::CHANNELS, selected: selected, default: 'Email'  %>
   </div>
 
-  <div class='field'>
-    <%= f.label :position %>
-    <%= f.number_field :position  %>
-  </div>
-
   <%= render '/refinery/admin/form_actions', f: f,
              continue_editing: false,
              delete_title: t('delete', scope: 'refinery.testimonials.admin.testimonials.testimonial'),
              delete_confirmation: t('message', scope: 'refinery.admin.delete', title: @testimonial.name) %>
-<% end %>
-<% content_for :javascripts do %>
-  <script>
-    $(document).ready(function () {
-      if (!page_options.initialised){
-        page_options.init(false, '', '');
-      }
-    });
-  </script>
 <% end %>
 

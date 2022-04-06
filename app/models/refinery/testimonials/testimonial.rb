@@ -5,6 +5,8 @@ module Refinery
     # Model for Testimonials for RefineryCMS
     class Testimonial < Refinery::Core::BaseModel
       extend Mobility
+      include Filterable
+
       self.table_name = 'refinery_testimonials'
 
       translates :quote, :excerpt
@@ -18,12 +20,21 @@ module Refinery
         define_method("#{meth}?") { channels == index }
       end
 
+      has_and_belongs_to_many :pages,
+                              class_name: 'Refinery::Page',
+                              join_table: 'refinery_pages_testimonials'
+
       validates :name, presence: true, uniqueness: true
       validates :quote, presence: true
 
-      scope :random_selection,  -> { order(Arel.sql('RANDOM()'))}
       scope :has_excerpt?,      -> { where.not(excerpt: [nil,''])}
       scope :most_recent,       -> { order(received_date: :desc) }
+
+      def self.filters
+        %i[by_media]
+      end
+
+      filter_scope :by_media, -> (media_type) {CHANNELS}
 
       def flash_name
         "Quote by #{name}"

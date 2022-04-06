@@ -1,19 +1,25 @@
-<% status = testimonial.sensible? ? :ok : :warning %>
+<% status = testimonial.sensible? ? :ok : :warning
+   edit_tip = t('.edit')
+   delete_tip = t('.delete')
+%>
 <li class='record <%= cycle("on", "on-hover") %> <%= status %>' id="<%= dom_id(testimonial)%>">
   <span class='title'>
-    <%= testimonial.name || testimonial.id %>
+    <%= link_to testimonial.name,
+                refinery.edit_testimonials_admin_testimonial_path(testimonial),
+                title: edit_tip
+                  %>
   </span>
-  <% if testimonial.company.present? %>
-    <span> (<%= testimonial.company %>)</span>
-  <% end %>
+
+   <span> <%= testimonial.company.bracket if testimonial.company.present?  %></span>
+
   <span class='actions'>
-    <% title = t('.edit') %>
+
     <%= action_icon :edit, refinery.edit_testimonials_admin_testimonial_path(testimonial),
-                    title: title %>
+                    title: edit_tip %>
 
     <%= action_icon :delete,
                     refinery.testimonials_admin_testimonial_path(testimonial),
-                    t('refinery.testimonials.admin.testimonials.delete'),
+                    title: delete_tip,
                     class: "cancel confirm-delete",
                     data: {
                       confirm: t('refinery.admin.delete.message', title: testimonial.name)
