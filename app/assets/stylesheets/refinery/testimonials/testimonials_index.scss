@@ -5,10 +5,11 @@ ul.testimonials {
     grid-template-columns: [icon] 1.5rem [title] 1fr [date] 6rem [actions] 8rem;
     &::before {grid-column: icon}
     .title {grid-column: title}
-    .date  {grid-column: date}
+    .date, .no_date  {grid-column: date}
     .actions {grid-column: actions}
 
-    &.no_excerpt {@include icon('compress', orange)}
+    &.excerpt {@include icon('compress', orange)}
+    .no_date {@include icon('calendar', orange)}
     .date { font-style: italic}
 
   }

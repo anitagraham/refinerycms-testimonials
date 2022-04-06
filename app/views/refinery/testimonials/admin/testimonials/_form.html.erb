@@ -41,7 +41,7 @@
   <div class="field">
     <% selected = @testimonial.persisted? ? @testimonial.received_channel : 'Email' %>
     <%= f.label :received_channel %>
-    <%= f.select :received_channel, Refinery::Testimonials::Testimonial::CHANNELS, selected: selected, default: 'Email'  %>
+    <%= f.select :received_channel, Refinery::Testimonials.media, selected: selected, default: 'Email'  %>
   </div>
 
   <%= render '/refinery/admin/form_actions', f: f,

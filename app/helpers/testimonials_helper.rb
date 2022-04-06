@@ -1,4 +1,5 @@
 module TestimonialsHelper
+  include ActionView::Helpers::TagHelper
 
   def self.tab_classes(tab, tab_index, warnings)
     classes = ['ui-state-default']

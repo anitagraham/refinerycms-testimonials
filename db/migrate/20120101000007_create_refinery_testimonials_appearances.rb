@@ -1,9 +1,10 @@
-class CreatePagesTestimonials < ActiveRecord::Migration[4.2]
+class CreateRefineryTestimonialsAppearances < ActiveRecord::Migration[4.2]
 
   def up
-    create_table :refinery_pages_testimonials, if_not_exists: true do |t|
+    create_table :refinery_testimonials_appearances, if_not_exists: true do |t|
       t.references :page
       t.references :testimonial
+      t.string :format
     end
 
   end
@@ -13,7 +14,7 @@ class CreatePagesTestimonials < ActiveRecord::Migration[4.2]
       ::Refinery::UserPlugin.destroy_all({:name => "refinerycms-testimonials"})
     end
 
-    drop_table :refinery_pages_testimonials
+    drop_table :refinery_testimonial_appearances
 
   end
 

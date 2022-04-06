@@ -4,7 +4,7 @@ module Refinery
   module Testimonials
     # Controller for Testimonials
     class TestimonialsController < ::ApplicationController
-      respond_to :json, :html
+      respond_to :html
     end
   end
 end

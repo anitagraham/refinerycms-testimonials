@@ -1,13 +1,13 @@
 # Testimonials plugin for [Refinery CMS](https://github.com/refinery/refinerycms)
-
-Version 2.0 is a rewrite of the original refinerycms-testimonials. It is compatible with Refinery CMS 2.0.
+ Version 5.0 has breaking changes.
+Although testimonials retain the same form, they are now associated with Refinery Pages via a `has_many, through` association.
 
 ## How to install
 
 In your Gemfile, add the gem:
 
 ```ruby
-gem 'refinerycms-testimonials', '~> 2.0'
+gem 'refinerycms-testimonials', '~> 5.0'
 ```
 
 Now, run `bundle install` and the gem should install.
@@ -30,13 +30,10 @@ The testimonials fields are
 + jobtitle ( ditto )
 + received_channel (letter, email, facebook, twitter)
 
-##Control Testimonial display on a page
+## Displaying Testimonials
 
-Each page now has a testimonials tab which can be used to decide how testimonials should be displayed on that page
+Testimonials can be associated with a Refinery Page using the testimonials Tab.
 
-+ Show Testimonials on this page (default:  __no__)
-+ How many testimonials to show (n, __0__ means show all)
-+ How to select and order which testimonials to show (Random, __Most Recent First__)
 
 
 ## Changes to Views or Layout Templates

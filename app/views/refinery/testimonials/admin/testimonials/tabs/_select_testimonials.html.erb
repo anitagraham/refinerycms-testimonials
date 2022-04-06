@@ -1,17 +1,21 @@
-<% header = tag.h3 "Select testimonials to be shown on this page", class: :highlight
+<%
+  header = tag.h3 "Select testimonials to be shown on this page", class: :highlight
+  testimonials = Refinery::Testimonials::Testimonial.all
+  if testimonials.count.zero?
+    selection = 'No Testimonials'
+  else
+    testimonial_options = testimonials.map { |test| [test.select_option, test.id, { class: test.select_option_classes }] }
+    options = options_for_select(testimonial_options, @page.testimonials)
+    selection = select_tag :page_testimonial_ids, options,
+                           { multiple: true,
+                             class: [:multiselect, :testimonials],
+                             id: :testimonial_multiselect
+                           }
+  end
 
-   no_testimonials = 'No testimonials'
-   options = options_for_select @testimonials.map{ |testimonial| testimonial.select_option}
-   testimonial_collection = select_tag :page, options,
-                                              { multiple: true,
-                                                class: [:multiselect, :testimonials],
-                                                id: :testimonial_multiselect
-                                              }
-   selection = @testimonials.present? ? testimonial_collection : no_testimonials
-   content = tag.div header << selection, class: 'wym_skin_refinery page_part', id: 'page_testimonial_selector'
+  content = tag.div header << selection, class: 'wym_skin_refinery page_part', id: 'page_testimonial_selector'
 %>
 <section class="testimonials" >
   <%= content %>
 </section >
 
-<!--<%#= select_tag "font", options_for_select(@game.fonts.order(:name).map {|font| [font.name, font.id, data: {'font-code': font.font_code.html_safe }]}), class: "form-control", id: "keyboard-select" %><br>-->

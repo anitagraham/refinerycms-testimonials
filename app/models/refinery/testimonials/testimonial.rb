@@ -12,16 +12,13 @@ module Refinery
       translates :quote, :excerpt
       default_scope { i18n }
 
-      # Constants for how to show the testimonials
-      ORDER = %w[Random Recent].freeze
-      CHANNELS = %w[Letter Email Facebook Twitter].freeze
-      CHANNELS.each_with_index do |meth, index|
-        define_method("#{meth}?") { channels == index }
-      end
+      has_many :appearances, class_name: 'Refinery::Testimonials::Appearance'
+      has_many :pages, -> { distinct },
+               through: :appearances,
+               class_name: 'Refinery::Page',
+               inverse_of: :testimonials
 
-      has_and_belongs_to_many :pages,
-                              class_name: 'Refinery::Page',
-                              join_table: 'refinery_pages_testimonials'
+      accepts_nested_attributes_for :appearances
 
       validates :name, presence: true, uniqueness: true
       validates :quote, presence: true
@@ -33,7 +30,7 @@ module Refinery
         %i[by_media]
       end
 
-      filter_scope :by_media, -> (media_type) {CHANNELS}
+      filter_scope :by_media, -> (media_type) {Refinery::Testimonials.media}
 
       def flash_name
         "Quote by #{name}"
@@ -41,10 +38,13 @@ module Refinery
 
       def select_option
         co = company.present? ? company.bracket : nil
-        text = [name, co, received_date&.strftime('%b, %Y')].compact.join(' ').html_safe
-        classes = sensible? ?  'ok' : warnings.keys
-        [text, id, class: classes ]
+        [name, co, received_date&.strftime('%b, %Y')].compact.join(' ').html_safe
       end
+
+      def select_option_classes
+        warnings.keys unless sensible?
+      end
+
       def status
         sensible? ? 'OK' : 'warning'
       end
