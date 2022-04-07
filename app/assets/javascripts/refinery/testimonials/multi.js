@@ -109,7 +109,8 @@ var multi = (function() {
 
       var row = document.createElement("a");
       row.tabIndex = 0;
-      row.className = "item";
+      row.classList = option.classList;
+      row.classList.add ("item")
       row.innerText = label;
       row.setAttribute("role", "button");
       row.setAttribute("data-value", value);
@@ -128,8 +129,8 @@ var multi = (function() {
 
       // Create group if entering a new optgroup
       if (
-        option.parentNode.nodeName == "OPTGROUP" &&
-        option.parentNode != current_optgroup
+        option.parentNode.nodeName === "OPTGROUP" &&
+        option.parentNode !== current_optgroup
       ) {
         current_optgroup = option.parentNode;
         item_group = document.createElement("div");
@@ -146,7 +147,7 @@ var multi = (function() {
       }
 
       // Clear group if not inside optgroup
-      if (option.parentNode == select) {
+      if (option.parentNode === select) {
         item_group = null;
         current_optgroup = null;
       }
@@ -164,7 +165,23 @@ var multi = (function() {
         }
       }
     }
+    const select_contents = Array.from(select.wrapper.non_selected.children)
+    const all_options = select_contents.filter(filter_links)
+    let selected_options_count = all_options.filter(el => filter_className(el, 'selected')).length
+    let unselected_options_count = all_options.length - selected_options_count
+
+    non_selected_header.innerText = `${settings.non_selected_header} (${unselected_options_count})`
+    selected_header.innerText = `${settings.selected_header} (${selected_options_count})`
   };
+  const nullFilter = () => true
+  const filter_links = el => el.tagName ===  'A'
+  const filter_className = (el, cn) =>  el.classList.contains(cn)
+
+  // const how_many = (celement, filter) => {
+  //   let collection = Array.from(element.children)
+  //   filters.reduce((collection, condition) => collection.filter(condition), collection)
+  //   return collection.length
+  // }
 
   // Intializes and constructs an multi.js instance
   var init = function(select, settings) {

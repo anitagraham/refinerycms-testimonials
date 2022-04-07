@@ -7,7 +7,8 @@ module Refinery
       class TestimonialsController < ::Refinery::AdminController
         crudify :'refinery/testimonials/testimonial',
                 include: [:translations],
-                title_attribute: :flash_name
+                title_attribute: :flash_name,
+                order: 'received_date DESC'
         private
 
         def testimonial_params
