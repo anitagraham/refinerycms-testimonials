@@ -1,9 +1,9 @@
 module Refinery
   module Testimonials
     class Version
-      @major = 4
-      @minor = 1
-      @tiny  = 0
+      @major = 5
+      @minor = 0
+      @tiny  = 1
 
       class << self
         attr_reader :major, :minor, :tiny

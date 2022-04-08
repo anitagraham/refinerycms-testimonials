@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
   s.authors           = 'tsdbrown - Luke Brown- magpieuk, Lee Irving - http://www.transcendit.co.uk, anita - Anita Graham - http//:www.joli.com.au'
 
   # Runtime dependencies
-  s.add_dependency 'actionmailer',      '>= 5.1'
   s.add_dependency 'refinerycms-core',  ['>= 3.0.0', '< 5.0']
 
   s.required_ruby_version = '>= 2.2.2'

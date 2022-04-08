@@ -3,7 +3,7 @@
 module Refinery
   module Testimonials
     module Admin
-      # Admin controller for Testimonials
+
       class TestimonialsController < ::Refinery::AdminController
         crudify :'refinery/testimonials/testimonial',
                 include: [:translations],

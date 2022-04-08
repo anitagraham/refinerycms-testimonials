@@ -8,5 +8,4 @@ module TestimonialsHelper
     end
     classes.join(' ')
   end
-
 end
