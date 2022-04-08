@@ -1,11 +1,11 @@
 <% header = tag.h3 "Select testimonials to be shown on this page", class: :highlight
-   testimonials = Refinery::Testimonials::Testimonial.most_recent
-   no_testimonials = 'No testimonials entered yet'
+
+   no_testimonials = 'No testimonials'
    testimonial_collection = collection_select :page, :testimonial_ids,
-                                              testimonials,
+                                              @testimonials,
                                               :id,
-                                              :as_selection_item, { class: :status }
-                                              { multiple: true, class: :multiselect, id: :testimonial_multiselect }
+                                              :name,
+                                              { multiple: true }
    selection = testimonials.present? ? testimonial_collection : no_testimonials
    content = tag.div header << selection, class: 'wym_skin_refinery page_part', id: 'page_testimonial_selector'
 %>

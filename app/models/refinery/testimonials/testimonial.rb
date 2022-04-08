@@ -15,7 +15,6 @@ module Refinery
       # Constants for how to show the testimonials
       ORDER = %w[Random Recent].freeze
       CHANNELS = %w[Letter Email Facebook Twitter].freeze
-
       CHANNELS.each_with_index do |meth, index|
         define_method("#{meth}?") { channels == index }
       end
@@ -42,10 +41,6 @@ module Refinery
 
       def status
         sensible? ? 'OK' : 'warning'
-      end
-
-      def as_selection_item
-        [ name, (company.bracket if company.present?), received_date.strftime('%b %Y')].compact.join(', ')
       end
 
       warning do |testimonial|
