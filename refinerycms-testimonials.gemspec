@@ -12,8 +12,8 @@ Gem::Specification.new do |s|
   s.authors           = 'tsdbrown - Luke Brown- magpieuk, Lee Irving - http://www.transcendit.co.uk, Anita Graham - http//:www.joli.com.au'
 
   # Runtime dependencies
-  s.add_dependency 'refinerycms-core',  ['>= 3.0.0', '< 5.0']
-  s.add_dependency 'rails', ['~> 6.0.0', '< 7']
+  s.add_dependency 'refinerycms-core',  ['>= 4.0.1', '< 5.0']
+  s.add_dependency 'rails', ['~> 6.0', '< 7']
 
   s.required_ruby_version = '>= 2.2.2'
 end
