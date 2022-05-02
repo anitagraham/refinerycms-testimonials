@@ -4,37 +4,37 @@ module Refinery
   module Testimonials
     describe Testimonial, type: :model do
 
-      let(:good_testimonial)     { FactoryBot.create(:testimonial)}
-      let(:no_name_testimonial)  { FactoryBot.create(:testimonial, name: "") }
-      let(:no_quote_testimonial) { FactoryBot.create(:testimonial, quote: "")}
+      let(:good_testimonial) { FactoryBot.create(:testimonial) }
 
       describe 'validations' do
         context "with all required attributes" do
+          before do
+            good_testimonial.valid?
+          end
           it "has no errors" do
-            expect(good_testimonial.errors).to  be_empty
+            expect(good_testimonial.errors).to be_empty
           end
           it "has a name" do
-            expect(testimonial.name).to  eq('Person Name')
+            expect(good_testimonial.name).to match(/Person Name \d+/)
           end
           it "has a quote" do
-            expect(testimonial.quote).to eq('Like your work')
+            expect(good_testimonial.quote).to match(/Like your work \d+/)
           end
         end
 
         context "without required attribute name" do
+          subject { FactoryBot.build(:testimonial, name: "") }
           it 'fails validation' do
-            expect(no_name_testimonial).not_to be_valid
-          end
-          it "has errors" do
-            expect(no_name_testimonial.errors).not_to be_empty
+            expect(subject).not_to be_valid
+            expect(subject.errors).to_not be_empty
           end
         end
+
         context "without required attribute quote" do
+          subject { FactoryBot.build(:testimonial, quote: "") }
           it 'fails validation' do
-            expect(no_quote_testimonial).not_to be_valid
-          end
-          it "has errors" do
-            expect(no_name_testimonial.errors).not_to be_empty
+            expect(subject).not_to be_valid
+            expect(subject.errors).not_to be_empty
           end
         end
       end

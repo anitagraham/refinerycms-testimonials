@@ -1,24 +1,28 @@
 <%= form_for [refinery, :testimonials_admin, @testimonial] do |f| %>
-  <%= render '/refinery/admin/error_messages',   object: @testimonial, include_object_name: true %>
-  <%= render '/refinery/testimonials/admin/warning_messages', object: @testimonial, include_object_name: true unless @testimonial.sensible? %>
+  <%= render '/refinery/admin/error_messages',
+             object: @testimonial,
+             include_object_name: true %>
+  <%= render('/refinery/testimonials/admin/warning_messages',
+             object: @testimonial,
+             include_object_name: true) unless @testimonial.sensible? %>
 
   <div class='field'>
     <%= f.label :name %>
-    <%= f.text_field :name, class: 'larger widest'  %>
+    <%= f.text_field :name, class: 'larger widest' %>
   </div>
 
   <div class='field'>
     <div id='page-tabs' class='clearfix'>
       <ul id='page_parts'>
         <% ::Refinery::Testimonials.tabs.each_with_index do |tab, tab_index| %>
-          <li >
+          <li>
             <%= link_to tab.name.titleize, "\#tab_#{tab_index}_editor" %>
           </li>
         <% end %>
       </ul>
       <div id="page_part_editors">
         <% ::Refinery::Testimonials.tabs.each_with_index do |tab, tab_index| %>
-          <div class='page_part' id='<%= "tab_#{tab_index}_editor" %>'>
+          <div class='page_part field' id='<%= "tab_#{tab_index}_editor" %>'>
             <%= render tab.partial, f: f, fields: tab.fields %>
           </div>
         <% end %>
@@ -35,18 +39,26 @@
     %>
     <%= f.label :received_date %>
     <%= f.date_select :received_date, selected: selected, order: [:day, :month, :year],
-                      default: today  %>
+                      default: today %>
   </div>
 
   <div class="field">
     <% selected = @testimonial.persisted? ? @testimonial.received_channel : 'Email' %>
     <%= f.label :received_channel %>
-    <%= f.select :received_channel, Refinery::Testimonials.media, selected: selected, default: 'Email'  %>
+    <%= f.select :received_channel, Refinery::Testimonials.media, selected: selected, default: 'Email' %>
   </div>
 
   <%= render '/refinery/admin/form_actions', f: f,
              continue_editing: false,
              delete_title: t('delete', scope: 'refinery.testimonials.admin.testimonials.testimonial'),
              delete_confirmation: t('message', scope: 'refinery.admin.delete', title: @testimonial.name) %>
+<% end %>
+
+<% content_for :javascripts do %>
+<script>
+  $(document).ready(function () {
+    page_options.init(false, '', '');
+  });
+</script>
 <% end %>
 

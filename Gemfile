@@ -31,13 +31,17 @@ end
 
 gem "jruby-openssl", :platform => :jruby
 
-
 group :development do
   gem 'listen'
 end
 
 group :test do
-  gem "launchy"
+  gem 'generator_spec', '~> 0.9.3'
+  gem 'launchy'
+  gem 'coveralls', require: false
+  gem 'rspec-retry'
+  gem 'falcon'
+  gem 'falcon-capybara'
 end
 
 # Load local gems according to Refinery developer preference.

@@ -9,6 +9,7 @@ module Refinery
                 include: [:translations],
                 title_attribute: :flash_name,
                 order: 'received_date DESC'
+
         private
 
         def testimonial_params

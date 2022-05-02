@@ -2,7 +2,7 @@ module Refinery
   module Testimonials
     class Version
       @major = 5
-      @minor = 1
+      @minor = 2
       @tiny  = 0
 
       class << self

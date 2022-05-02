@@ -1,23 +1,19 @@
+<% # this partial is used by a Refinery::Page to select which testimonials to show on the page %>
 <%
-  testimonials = Refinery::Testimonials::Testimonial.all
-  header = tag.h3 "Select Testimonials"
-  if testimonials.count.zero?
-    selection = 'No Testimonials'
-  else
-    testimonial_options = testimonials.map { |test| [test.select_option, test.id, { class: test.select_option_classes }] }
-    option_tags = options_for_select(testimonial_options, @page.testimonials)
-    select_classes = %w[multiselect testimonials]
-
-    selection = select_tag 'page["testimonial_ids"]', option_tags,
-                           { multiple: true, name: 'page[testimonial_ids][]',
-                             class: select_classes,
-                             id: :testimonial_multiselect }
-  end
-
-  content = tag.div header << selection, class: 'wym_skin_refinery page_part', id: 'page_testimonial_selector'
+  select_statement =
+    if @testimonials.nil? || @testimonials.size.zero?
+      "No Testimonials available"
+    else
+      collection_select(:page, :testimonial_ids, @testimonials, :id, :name, {},
+                        multiple: true,
+                        class: %w[multiselect testimonials],
+                        id: :testimonial_multiselect)
+    end
 %>
-<section class="testimonials">
-  <h3 class="highlight">Select testimonials to be shown on this page</h3>
 
-  <%= content %>
+<section class="testimonials">
+  <div class="wym_skin_refinery page_part" id="page_testimonial_selector">
+    <h3 class="highlight">Select testimonials to be shown on this page</h3>
+    <%= select_statement %>
+  </div>
 </section>

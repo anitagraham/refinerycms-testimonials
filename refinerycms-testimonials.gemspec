@@ -1,5 +1,5 @@
 require File.expand_path('lib/refinery/testimonials/version', __dir__)
-rails_version = '~>6.1'
+
 version = Refinery::Testimonials::Version.to_s
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY

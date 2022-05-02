@@ -13,7 +13,7 @@ module Refinery
       default_scope { i18n }
 
       has_many :appearances, class_name: 'Refinery::Testimonials::Appearance'
-      has_many :pages, -> { distinct },
+      has_many :pages,
                through: :appearances,
                class_name: 'Refinery::Page',
                inverse_of: :testimonials

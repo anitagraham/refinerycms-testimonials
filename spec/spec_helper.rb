@@ -4,30 +4,14 @@ require 'rubygems'
 
 ENGINE_RAILS_ROOT = File.join(File.dirname(__FILE__), '../') unless defined?(ENGINE_RAILS_ROOT)
 
-# Configure Rails Environment
-ENV["RAILS_ENV"] ||= 'test'
-
-if ENV['TRAVIS']
-  require 'coveralls'
-  Coveralls.wear!
-end
-
-require File.expand_path("../dummy/config/environment", __FILE__)
-
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'webdrivers/chromedriver'
+require 'falcon/capybara'
 
-if ENV['RETRY_COUNT']
-  require 'rspec/retry'
-  RSpec.configure do |config|
-    # rspec-retry
-    config.verbose_retry = true
-    config.default_sleep_interval = 0.33
-    config.clear_lets_on_failure = true
-    config.default_retry_count = ENV["RETRY_COUNT"]
-  end
-end
+Capybara.server = :falcon
+
+require 'refinerycms-testing'
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -41,15 +25,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.use_transactional_fixtures = true
-
-  config.when_first_matching_example_defined(type: :system) do
-    config.before :suite do
-      # Preload assets
-      # This should avoid capybara timeouts, and avoid counting asset compilation
-      # towards the timing of the first feature spec.
-      Rails.application.precompiled_assets
-    end
-  end
+  config.include AbstractController::Translation
 
   config.before(:each) do
     ::I18n.default_locale = I18n.locale = Mobility.locale = :en
@@ -72,6 +48,10 @@ RSpec.configure do |config|
 
   # Store last errors so we can run rspec with --only-failures
   config.example_status_persistence_file_path = ".rspec_failures"
+
+  # config.file_fixture_path = "spec/fixtures/files"
+  config.file_fixture_path = "spec/fixtures"
+
 end
 
 # Requires supporting files with custom matchers and macros, etc,
