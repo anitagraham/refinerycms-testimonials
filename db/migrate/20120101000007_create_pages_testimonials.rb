@@ -1,7 +1,7 @@
 class CreatePagesTestimonials < ActiveRecord::Migration[4.2]
 
   def up
-    create_table :refinery_pages_testimonials do |t|
+    create_table :refinery_pages_testimonials, if_not_exists: true do |t|
       t.references :page
       t.references :testimonial
     end

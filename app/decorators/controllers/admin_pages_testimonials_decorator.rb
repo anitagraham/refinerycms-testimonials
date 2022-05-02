@@ -1,4 +1,4 @@
-module PagesTestimonialsDecorator
+module AdminPageTestimonialsDecorator
 
   protected
       def get_testimonials
@@ -11,7 +11,7 @@ module PagesTestimonialsDecorator
 
   end
 
-Refinery::Admin::PagesController.send :prepend, PagesTestimonialsDecorator
+Refinery::Admin::PagesController.send :prepend, AdminPageTestimonialsDecorator
 Refinery::Admin::PagesController.class_eval do
   before_action :get_testimonials, only: [:edit]
 end

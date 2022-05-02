@@ -1,6 +1,6 @@
 class CreateTestimonialTranslations < ActiveRecord::Migration[6.0]
   def change
-    create_table :refinery_testimonial_translations do |t|
+    create_table :refinery_testimonial_translations, if_not_exists: true do |t|
 
       # Translated attribute(s)
       t.text :quote

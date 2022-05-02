@@ -1,6 +1,6 @@
 <% if object.warnings.any? %>
   <div class="warningExplanation" id="warnings">
-    <p class="error_icon">Problems in the following fields:</p>
+    <p class="warning_icon">Problems in the following fields:</p>
     <ul>
     <% if defined?(include_object_name) and include_object_name %>
       <% object.warnings.full_messages.each do |value| %>

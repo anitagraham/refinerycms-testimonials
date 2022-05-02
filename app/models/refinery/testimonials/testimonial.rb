@@ -39,6 +39,12 @@ module Refinery
         "Quote by #{name}"
       end
 
+      def select_option
+        co = company.present? ? company.bracket : nil
+        text = [name, co, received_date&.strftime('%b, %Y')].compact.join(' ').html_safe
+        classes = sensible? ?  'ok' : warnings.keys
+        [text, id, class: classes ]
+      end
       def status
         sensible? ? 'OK' : 'warning'
       end

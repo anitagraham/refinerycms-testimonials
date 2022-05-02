@@ -26,8 +26,8 @@ module Refinery
       describe 'testimonials_show set' do
         context 'testimonials_count 0' do
           it 'should return all testimonials' do
-            get :show, path: 'test-controls'
-            expect(assigns(:testimonials)).to have(3).items
+            get :show, params: { use_route: 'pages/test-controls' }
+            expect(assigns(:testimonials).count).to eq 3
           end
         end
 
@@ -38,8 +38,8 @@ module Refinery
             test_page.save
           end
           it 'should return two testimonials' do
-            get :show, path: 'test-controls'
-            expect(assigns(:testimonials)).to have(4).items
+            get :show, 'test-controls'
+            expect(assigns(:testimonials).count).to eq 4
           end
         end
 

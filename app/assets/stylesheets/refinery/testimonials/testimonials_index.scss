@@ -1,0 +1,15 @@
+#page_testimonial_selector {  font-size: 1rem !important; }
+ul.testimonials {
+  li {
+    display: grid;
+    grid-template-columns: [icon] 1.5rem [title] 1fr [date] 6rem [actions] 8rem;
+    &::before {grid-column: icon}
+    .title {grid-column: title}
+    .date  {grid-column: date}
+    .actions {grid-column: actions}
+
+    &.no_excerpt {@include icon('compress', orange)}
+    .date { font-style: italic}
+
+  }
+}

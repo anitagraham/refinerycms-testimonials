@@ -18,7 +18,5 @@ require "refinerycms-testing"
 Refinery::Testing::Railtie.load_dummy_tasks ENGINE_PATH
 
 desc "Build gem files for all projects"
-task :build => "all:build"
-
-task :default => :spec
-
+task build: "all:build"
+task default: :spec
