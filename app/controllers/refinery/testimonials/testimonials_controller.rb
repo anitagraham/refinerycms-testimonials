@@ -4,7 +4,9 @@ module Refinery
   module Testimonials
     # Controller for Testimonials
     class TestimonialsController < ::ApplicationController
-      respond_to :html
+      def index
+        @testimonials = Testimonial.all.includes(:translations)
+      end
     end
   end
 end
