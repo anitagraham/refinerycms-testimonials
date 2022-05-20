@@ -24,7 +24,7 @@ module Refinery
       validates :quote, presence: true
 
       scope :has_excerpt?,      -> { where.not(excerpt: [nil,''])}
-      scope :most_recent,       -> { order(received_date: :desc) }
+      scope :recent,       -> { order(received_date: :desc) }
 
       def self.filters
         %i[by_media]

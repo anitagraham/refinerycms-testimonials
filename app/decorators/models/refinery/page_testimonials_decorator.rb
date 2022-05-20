@@ -6,7 +6,6 @@ module Refinery
                     through: :appearances,
                     class_name: "Refinery::Testimonials::Testimonial",
                     inverse_of: :pages
-
     end
   end
 end
