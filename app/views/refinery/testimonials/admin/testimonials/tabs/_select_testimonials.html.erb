@@ -6,16 +6,18 @@
   else
     testimonial_options = testimonials.map { |test| [test.select_option, test.id, { class: test.select_option_classes }] }
     options = options_for_select(testimonial_options, @page.testimonials)
-    selection = select_tag :page_testimonial_ids, options,
-                           { multiple: true,
-                             class: [:multiselect, :testimonials],
-                             id: :testimonial_multiselect
-                           }
+    select_classes = %w[multiselect testimonials]
+    # option_tags = testimonials.reduce(ActiveSupport::SafeBuffer.new) do|buffer, t|
+    #   buffer << tag.option(t.select_option, t.id, { class: t.select_option_classes })
+    # end
+    selection = select_tag :page['testimonial_ids'], options,
+                           multiple: true, name: 'page[testimonial_ids][]',
+                           class: select_classes,
+                           id: :testimonial_multiselect
   end
 
   content = tag.div header << selection, class: 'wym_skin_refinery page_part', id: 'page_testimonial_selector'
 %>
-<section class="testimonials" >
+<section class="testimonials">
   <%= content %>
-</section >
-
+</section>

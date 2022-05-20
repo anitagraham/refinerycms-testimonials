@@ -7,7 +7,6 @@ module Refinery
                     class_name: "Refinery::Testimonials::Testimonial",
                     inverse_of: :pages
 
-      base.accepts_nested_attributes_for :appearances
     end
   end
 end
