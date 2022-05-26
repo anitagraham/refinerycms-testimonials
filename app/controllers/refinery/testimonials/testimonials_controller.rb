@@ -5,7 +5,7 @@ module Refinery
     # Controller for Testimonials
     class TestimonialsController < ::ApplicationController
       def index
-        @testimonials = Testimonial.all.includes(:translations)
+        @testimonials = Testimonial.all.order('received_date DESC')
       end
     end
   end
