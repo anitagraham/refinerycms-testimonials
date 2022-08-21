@@ -23,7 +23,7 @@ module Refinery
       validates :name, presence: true, uniqueness: true
       validates :quote, presence: true
 
-      scope :has_excerpt?,      -> { where.not(excerpt: [nil,''])}
+      scope :has_excerpt?, -> { where.not(excerpt: [nil,''])}
       scope :recent,       -> { order(received_date: :desc) }
 
       def self.filters
