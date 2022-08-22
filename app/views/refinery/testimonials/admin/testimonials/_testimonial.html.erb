@@ -2,13 +2,13 @@
    delete_tip = t('.delete')
    css_classes = [:record, cycle("on", "on-hover")]
    title = "#{testimonial.name} #{testimonial&.company.bracket if testimonial.company.present?}"
-   testimonial.warnings.keys.each { |key| css_classes.push key } unless testimonial.sensible?
+   testimonial.warnings.attribute_names.each { |key| css_classes.push key } unless testimonial.sensible?
 %>
 
 <li class="<%= css_classes.join(' ') %>" id="<%= dom_id(testimonial) %>" >
   <%= link_to title, refinery.edit_testimonials_admin_testimonial_path(testimonial), title: edit_tip, class: :title %>
 
-  <% if testimonial.warnings.keys.include? :received_date %>
+  <% if testimonial.warnings.attribute_names.include? :received_date %>
     <span class="no_date" ></span >
   <% else %>
     <span class="date" > <%= testimonial.received_date.strftime('%b, %Y') %>  </span >

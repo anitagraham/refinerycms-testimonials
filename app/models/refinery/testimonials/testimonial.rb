@@ -42,7 +42,7 @@ module Refinery
       end
 
       def select_option_classes
-        warnings.keys unless sensible?
+        warnings.attribute_names unless sensible?
       end
 
       def status
