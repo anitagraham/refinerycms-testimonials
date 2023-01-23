@@ -1,6 +1,6 @@
 <%
-  header = tag.h3 "Select testimonials to be shown on this page", class: :highlight
   testimonials = Refinery::Testimonials::Testimonial.all
+  header = tag.h3 "Select Testimonials"
   if testimonials.count.zero?
     selection = 'No Testimonials'
   else
@@ -17,5 +17,7 @@
   content = tag.div header << selection, class: 'wym_skin_refinery page_part', id: 'page_testimonial_selector'
 %>
 <section class="testimonials">
+  <h3 class="highlight">Select testimonials to be shown on this page</h3>
+
   <%= content %>
 </section>

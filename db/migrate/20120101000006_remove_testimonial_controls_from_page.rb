@@ -1,4 +1,4 @@
-class RemoveTestimonialControlsFromPages < ActiveRecord::Migration[4.2]
+class RemoveTestimonialControlsFromPage < ActiveRecord::Migration[4.2]
 
   def change
     remove_column :refinery_pages, :testimonials_show, :boolean, if_exists: true
