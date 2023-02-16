@@ -32,17 +32,34 @@ The testimonials fields are
 
 ## Displaying Testimonials
 
-Testimonials can be associated with a Refinery Page using the testimonials Tab.
+Testimonials can be associated with a Refinery Page using a testimonials Tab which the extension adds to the page editor.
 
+By default testimonials are displayed as a multiple select tag.
 
+These can be displayed as a two-sided select box using javascript, or could be shown with checkboxes.
+
+To change the select to checkboxes you can over-ride the partial that creates the tab.
+
+```shell
+$ rails refinery:override view=testimonials/admin/testimonials/tabs/_select_testimonials
+```
+
+*('select' in the filename indicating a choice, rather than a select statement.)*
+
+To get check boxes, replace the `collection_select` in that file with 
+
+```ruby
+collection_check_boxes(:page, :testimonial_ids, @testimonials, :id, :name)
+```
 
 ## Changes to Views or Layout Templates
 
-See Enabling Custome Layout Templates in this [refinery guide](http://refinerycms.com/guides/using-custom-view-or-layout-templates)
+See Enabling Custom Layout Templates in this [refinery guide](http://refinerycms.com/guides/using-custom-view-or-layout-templates)
 
 ## Views
 
-Somewhere in a view or layout you will need to call the testimonials partial.
+
+Somewhere in a view or layout you will need to call a  testimonials partial.
 
 ````erb
 <section id='side'>
@@ -57,7 +74,7 @@ For more control over what is displayed the `@testimonials` collection is availa
 You can call your own partial to render the collection.
 
 ````erb
-<%= render 'myTestimonials', :testimonials => @testimonials.as_json %>
+<%= render 'myTestimonials', @page.testimonials %>
 ````
 
 

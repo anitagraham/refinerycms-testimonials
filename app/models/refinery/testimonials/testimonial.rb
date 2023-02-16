@@ -49,8 +49,11 @@ module Refinery
         sensible? ? 'OK' : 'warning'
       end
 
+      def name_status
+
+      end
       warning do |testimonial|
-        testimonial.warnings.add(:excerpt, ": No excerpt written") unless testimonial.excerpt.present?
+        testimonial.warnings.add(:no_excerpt, ": No excerpt written") unless testimonial.excerpt.present?
         testimonial.warnings.add(:received_date, ": No date") unless testimonial.received_date
       end
     end

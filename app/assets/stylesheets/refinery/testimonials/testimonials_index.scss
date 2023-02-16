@@ -8,7 +8,7 @@ ul.testimonials {
     .date, .no_date  {grid-column: date}
     .actions {grid-column: actions}
 
-    &.excerpt {@include icon('compress', orange)}
+    &.no_excerpt {@include icon('warn', orange)}
     .no_date {@include icon('calendar', orange)}
     .date { font-style: italic}
 

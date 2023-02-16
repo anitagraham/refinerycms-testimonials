@@ -6,8 +6,10 @@
     else
       collection_select(:page, :testimonial_ids, @testimonials, :id, :name, {},
                         multiple: true,
-                        class: %w[multiselect testimonials],
-                        id: :testimonial_multiselect)
+                        class: :testimonials,
+                        id: :select_testimonials)
+      # Alternative for checkboxes
+      # collection_check_boxes(:page, :testimonial_ids, @testimonials, :id, :name)
     end
 %>
 
