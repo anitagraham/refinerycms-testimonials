@@ -1,6 +1,6 @@
 module Refinery
   module Pages
-    class TestimonialsSectionPresenter < Refinery::Pages::CollectionPresenter
+    class TestimonialItemPresenter < Refinery::Pages::CollectionPresenter
       include ActiveSupport::Configurable
       # A presenter which knows how to render a single testimonial
 
